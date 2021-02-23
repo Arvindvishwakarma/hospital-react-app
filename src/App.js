@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import AdminLogin from './pages/admin/AdminLogin';
 import HospitalLogin from './pages/hospitals/HospitalLogin';
 import HospitalRegister from './components/HospitalComponents/RequestForms';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 
 import {Route, Switch} from 'react-router-dom';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/admin_login"><AdminLogin /></Route>
         <Route path="/hospital_login"><HospitalLogin /></Route>
         <Route path="/hospital_register"><HospitalRegister /></Route>
+        <Route path="/admin_dashboard"><AdminDashboard /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
     </div>

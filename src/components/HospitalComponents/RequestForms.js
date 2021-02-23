@@ -16,9 +16,9 @@ function RequestForms(){
     return(
         <>
      <Container style={{ marginTop: '30px' }} >
-    <Card>
-    <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white'}}>Register Your Hospital </Card.Header>
-        <Card.Body style={{marginTop:'-20px'}}>
+    <Card style={{borderRadius:'30px 30px 30px 30px'}}>
+    <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Register Your Hospital </Card.Header>
+        <Card.Body style={{marginTop:'-20px',marginBottom: '-20px'}}>
             <Row>
                 <Col md={5} className="col_img">
                 </Col>
@@ -236,6 +236,7 @@ function RequestForms(){
         </Card.Body>
     </Card>
      </Container>
+<br></br>
         </>
     )
 }

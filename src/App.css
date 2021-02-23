@@ -17,6 +17,13 @@
   background: url(/src/images/hospital_registeration.jpg);
   background-size: cover;
   background-position: center;
-  height: 130vh;
+  height: 120vh;
   margin-left: -5px;
+  border-radius: 0px 0px 0px 30px;
+}
+
+@media (max-width: 600px) {
+  .col_img  {
+      display:none !important;
+  }
 }
