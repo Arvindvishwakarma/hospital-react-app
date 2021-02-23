@@ -1,7 +1,13 @@
 import './App.css';
 import NavbarMenu from './components/NavbarMenu';
-import Login from './pages/Login';
 import Home from './pages/Home';
+import Objectives from './pages/Objectives';
+import Guide from './pages/Guide';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import AdminLogin from './pages/admin/AdminLogin';
+import HospitalLogin from './pages/hospitals/HospitalLogin';
+
 import {Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -10,10 +16,14 @@ function App() {
       <NavbarMenu />
       <Switch>
         <Route path="/" exact={true}><Home /></Route>
-        <Route path="/login"><Login /></Route>
+        <Route path="/objectives"><Objectives /></Route>
+        <Route path="/guide"><Guide /></Route>
+        <Route path="/about"><About /></Route>
+        <Route path="/contact"><Contact /></Route>
+        <Route path="/admin_login"><AdminLogin /></Route>
+        <Route path="/hospital_login"><HospitalLogin /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
-      
     </div>
   );
 }

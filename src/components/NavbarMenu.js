@@ -4,8 +4,8 @@ import {Navbar,Nav} from 'react-bootstrap';
 function NavbarMenu() {
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
-                <Navbar.Brand href="#home"><img
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="/"><img
                                 src={logo}
                                 width="40"
                                 height="40"
@@ -16,12 +16,13 @@ function NavbarMenu() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#objective">Objectives</Nav.Link>
-                        <Nav.Link href="#guide">Guide</Nav.Link>
-                        <Nav.Link href="#about">About Us</Nav.Link>
-                        <Nav.Link href="#contact">Contact Us</Nav.Link>
-                        <Nav.Link href="login">Login</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/objectives">Objectives</Nav.Link>
+                        <Nav.Link href="/guide">Guide</Nav.Link>
+                        <Nav.Link href="/about">About Us</Nav.Link>
+                        <Nav.Link href="/contact">Contact Us</Nav.Link>
+                        <Nav.Link href="/admin_login">Admin Login</Nav.Link>
+                        <Nav.Link href="/hospital_login">Hospital Login</Nav.Link>
                     </Nav>
 
                 </Navbar.Collapse>
