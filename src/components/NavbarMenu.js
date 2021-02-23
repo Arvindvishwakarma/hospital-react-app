@@ -23,6 +23,7 @@ function NavbarMenu() {
                         <Nav.Link href="/contact">Contact Us</Nav.Link>
                         <Nav.Link href="/admin_login">Admin Login</Nav.Link>
                         <Nav.Link href="/hospital_login">Hospital Login</Nav.Link>
+                        <Nav.Link href="/hospital_register">Hospital Register Form</Nav.Link>
                     </Nav>
 
                 </Navbar.Collapse>
