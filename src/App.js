@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import AdminLogin from './pages/admin/AdminLogin';
 import HospitalLogin from './pages/hospitals/HospitalLogin';
 import HospitalRegister from './components/HospitalComponents/RequestForms';
+import UserRegister from './components/HospitalComponents/UserForm';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/hospital_login"><HospitalLogin /></Route>
         <Route path="/hospital_register"><HospitalRegister /></Route>
         <Route path="/admin_dashboard"><AdminDashboard /></Route>
+        <Route path="/user_register"><UserRegister /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
     </div>
