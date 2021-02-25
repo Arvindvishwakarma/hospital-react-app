@@ -17,7 +17,7 @@ function UserForm(){
         <>
      <Container style={{ marginTop: '30px' }} >
     <Card style={{borderRadius:'30px 30px 30px 30px'}}>
-    <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Fill Patiet Details</Card.Header>
+    <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Fill Patient Details</Card.Header>
         <Card.Body style={{marginTop:'-20px',marginBottom: '-20px'}}>
             <Row>
                 <Col md={5} className="col_img">
@@ -53,7 +53,7 @@ function UserForm(){
                                         </Form.Row>
                                        
                                         <Form.Row>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom02">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom04">
                                                 <Form.Label>Aadhar Number</Form.Label>
                                                 <Form.Control
                                                     required
@@ -65,7 +65,7 @@ function UserForm(){
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom03">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom05">
                                                 <Form.Label>Contact No.</Form.Label>
                                                 <Form.Control
                                                     required
@@ -80,7 +80,7 @@ function UserForm(){
                                             </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom04">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom06">
                                                 <Form.Label>Email Address</Form.Label>
                                                 <Form.Control
                                                     required
@@ -92,7 +92,7 @@ function UserForm(){
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom05">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom07">
                                                 <Form.Label>Date Of Birth</Form.Label>
                                                 <Form.Control
                                                     required
@@ -108,7 +108,7 @@ function UserForm(){
                                         </Form.Row>
 
                                         <Form.Row>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom06">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom08">
                                                 <Form.Label>Gender</Form.Label>
                                                 <Form.Control
                                                     required
@@ -119,13 +119,14 @@ function UserForm(){
                         
                                                     <option>Male</option>
                                                     <option>Female</option>
+                                                    <option>Other</option>
                                                     </Form.Control>
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide Gender.
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom07">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom09">
                                                 <Form.Label>Maretial Status</Form.Label>
                                                 <Form.Control
                                                     required
@@ -146,13 +147,13 @@ function UserForm(){
                                         </Form.Row>
                                         
                                         <Form.Row>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom08">
-                                                <Form.Label>Patient Diseas</Form.Label>
+                                            <Form.Group as={Col} md="6" controlId="validationCustom10">
+                                                <Form.Label>Patient Disease</Form.Label>
                                                 <Form.Control 
                     
                                                     required
                                                     type="text"
-                                                    placeholder="Enter Patient Diseas "
+                                                    placeholder="Enter Patient Disease "
                                           
                                                 />
                                                 <Form.Control.Feedback type="invalid">
@@ -160,7 +161,7 @@ function UserForm(){
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom04">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom11">
                                                 <Form.Label>Age</Form.Label>
                                                 <Form.Control
                                                     required
@@ -177,7 +178,7 @@ function UserForm(){
                                         </Form.Row>
                                        
                                         <Form.Row>
-                                            <Form.Group as={Col} md="12" controlId="validationCustom11">
+                                            <Form.Group as={Col} md="12" controlId="validationCustom12">
                                                 <Form.Label>Patient Permanent Address:</Form.Label>
                                                 <Form.Control 
                                                     as="textarea"
@@ -193,7 +194,7 @@ function UserForm(){
                                             </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom09">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom13">
                                                 <Form.Label>State:</Form.Label>
                                                 <Form.Control
                                                     required
@@ -205,7 +206,7 @@ function UserForm(){
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom10">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom14">
                                                 <Form.Label>District:</Form.Label>
                                                 <Form.Control
                                                     required
@@ -220,7 +221,7 @@ function UserForm(){
                                             </Form.Group>
                                         </Form.Row>
                                         <Form.Row>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom12">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom15">
                                                 <Form.Label>City:</Form.Label>
                                                 <Form.Control
                                                     required
@@ -232,7 +233,7 @@ function UserForm(){
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            <Form.Group as={Col} md="6" controlId="validationCustom13">
+                                            <Form.Group as={Col} md="6" controlId="validationCustom16">
                                                 <Form.Label>Enter Pincode:</Form.Label>
                                                 <Form.Control
                                                     required

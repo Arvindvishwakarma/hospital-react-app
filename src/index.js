@@ -5,7 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router} from 'react-router-dom';
-
+require('react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css');
+require('react-bootstrap-table-next/dist/react-bootstrap-table2.min.css');
+require('react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css');
 ReactDOM.render(
   <React.StrictMode>
     <Router><App /></Router>
