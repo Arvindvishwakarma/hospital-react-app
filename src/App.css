@@ -27,3 +27,18 @@
       display:none !important;
   }
 }
+.log_img{
+  position:fixed;
+  background: url(/src/images/admin.jpg);
+  background-size: cover;
+  background-position: center;
+  height:auto;
+  margin-left: -5px;
+  border-radius: 0px 0px 0px 30px;
+}
+
+.form-data{
+  
+  justify-content: center;
+  align-items: center;
+}
