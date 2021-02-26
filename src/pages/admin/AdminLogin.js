@@ -23,9 +23,10 @@ function AdminLogin(){
                 <Col md={5} className="log_img">
                 </Col>
                 <Col md={7} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px'}}>
+                
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                         <Form.Row>
-                                            <Form.Group as={Col} md="10" controlId="validationCustom01" >
+                                            <Form.Group as={Col} md="12" controlId="validationCustom01" >
                                                 <Form.Label>Login Id</Form.Label>
                                                 <Form.Control
                                                     required
@@ -41,7 +42,7 @@ function AdminLogin(){
                                         </Form.Row>
 
                                         <Form.Row>
-                                            <Form.Group as={Col} md="10" controlId="validationCustom02">
+                                            <Form.Group as={Col} md="12" controlId="validationCustom02">
                                                 <Form.Label>Password</Form.Label>
                                                 <Form.Control
                                                     required
@@ -53,17 +54,10 @@ function AdminLogin(){
                                                 </Form.Control.Feedback>
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
-                                            </Form.Row>
-                                        
-                                        <center>
-                                        <Button style={{marginRight:'75px'}} variant="dark" size="lg">
-      Log In
-    </Button>
-                                        </center>
-                                        
-                                    
- 
+                                            </Form.Row>         
+                                        <Button id="login-btn">Log In</Button>
                                     </Form>
+                                    <center>Don't have an account? <a href="#" ids="register_here">Register here</a></center>
                                     
                 </Col>
             </Row>
