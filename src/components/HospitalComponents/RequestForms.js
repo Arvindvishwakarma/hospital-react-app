@@ -4,6 +4,19 @@ import { Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
 function RequestForms(){
     const [validated, setValidated] = useState(false);
     let hospitalName = useRef(null)
+    let ownerName = useRef(null)
+    let ownerContact = useRef(null)
+    let ownerEmail = useRef(null)
+    let hospitalReg = useRef(null)
+    let hospitalType = useRef(null)
+    let hospitalGovernment = useRef(null)
+    let hospitalAddress = useRef(null)
+    let hospitalState = useRef(null)
+    let hospitalDistrict = useRef(null)
+    let hospitalWebsite = useRef(null)
+    let hospitalLongitude = useRef(null)
+    let hospitalLatitude = useRef(null)
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -15,7 +28,73 @@ function RequestForms(){
 
         event.preventDefault();
         const HospitalName = hospitalName.current.value;
-        console.log(HospitalName)
+        const OwnerName = ownerName.current.value;
+        const OwnerContact = ownerContact.current.value;
+        const OwnerEmail = ownerEmail.current.value;
+        const HospitalReg = hospitalReg.current.value;
+        const HospitalType = hospitalType.current.value;
+        const HospitalGovernment = hospitalGovernment.current.value;
+        const HospitalAddress = hospitalAddress.current.value;
+        const HospitalState = hospitalState.current.value;
+        const HospitalDistrict = hospitalDistrict.current.value;
+        const HospitalWebsite = hospitalWebsite.current.value;
+        const HospitalLongitude = hospitalLongitude.current.value;
+        const HospitalLatitude = hospitalLatitude.current.value;
+        
+        console.log(
+            HospitalName,
+            OwnerName,
+            OwnerContact,
+            OwnerEmail,
+            HospitalReg,
+            HospitalType,
+            HospitalGovernment,
+            HospitalAddress,
+            HospitalState,
+            HospitalDistrict,
+            HospitalWebsite,
+            HospitalLongitude,
+            HospitalLatitude,
+        )
+
+        const requestBody = {
+            query: `
+            mutation {
+                createHospital(input: {
+                    hospitalName: "${HospitalName}"
+                    hospitalRegistrationNo: "${HospitalReg}"
+                    hospitalType:"${HospitalType}"
+                    government:"${HospitalGovernment}"
+                    address:"${HospitalAddress}"
+                    state: "${HospitalState}"
+                    district: "${HospitalDistrict}"
+                    pincode: "456"
+                    website: "${HospitalWebsite}"
+                    lognitude:"${HospitalLongitude}"
+                    latitude: "${HospitalLatitude}"
+                    ownerName: "${OwnerName}"
+                    ownerContactNo: "${OwnerContact}"
+                    ownerEmail:"${OwnerEmail}"
+                    password:"123"
+                    status:"Pending"
+                })
+                {
+                    hospitalName
+                    status
+                }
+            }
+            `
+        };
+
+
+
+        fetch('http://localhost:4000/graphql',{
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        });
 
     };
     return(
@@ -52,6 +131,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Owner Name"
+                                                    ref = {ownerName}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide Owner name.
@@ -64,6 +144,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Owner Contact number"
+                                                    ref = {ownerContact}
                                                     
                                                 />
                                                 <Form.Control.Feedback type="invalid">
@@ -79,6 +160,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Owner Email Id"
+                                                    ref = {ownerEmail}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide Owner Email Id.
@@ -91,6 +173,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Hospital Registration Number "
+                                                    ref = {hospitalReg}
                                                     
                                                 />
                                                 <Form.Control.Feedback type="invalid">
@@ -107,7 +190,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     
-                                                    as="select">
+                                                    as="select" ref = {hospitalType}>
                                                     <option>Select Hospital Type</option>
                                                     <option>PHC</option>
                                                     <option>CHC</option>
@@ -117,6 +200,8 @@ function RequestForms(){
                                                     <option>General Hospital</option>
                                                     <option>Civil Hospital</option>
                                                     <option>Medical College</option>
+
+                                                    
                                                     </Form.Control>
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide Hospital Type.
@@ -129,13 +214,15 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     
-                                                    as="select">
+                                                    as="select" ref = {hospitalGovernment}>
                                                     <option>Select Category of Hospital </option>
                                                     <option>Central</option>
                                                     <option>State</option>
                                                     <option>Autonomus</option>
                                                     <option>Society</option>
                                                     <option>Cooperative</option>
+
+                                                    
                                                     </Form.Control>
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide Hospital Category.
@@ -153,6 +240,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Your Hospital Address "
+                                                    ref = {hospitalAddress}
                                           
                                                 />
                                                 <Form.Control.Feedback type="invalid">
@@ -168,6 +256,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter State"
+                                                    ref = {hospitalState}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please enter Correct State.
@@ -180,7 +269,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter District"
-                                                    
+                                                    ref = {hospitalDistrict}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please enter Correct District.
@@ -196,7 +285,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Your Hospital Website "
-                                          
+                                                    ref = {hospitalWebsite}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide correct Website.
@@ -211,6 +300,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Longitude"
+                                                    ref = {hospitalLongitude}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please enter Correct Longitude.
@@ -223,7 +313,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Latitude"
-                                                    
+                                                    ref = {hospitalLatitude}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please enter Correct Latitude.
