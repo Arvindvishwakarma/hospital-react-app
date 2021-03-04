@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card, Container, Row , Col ,Form, Button,handleSubmit,validated} from 'react-bootstrap';
+import {React, useState, useRef} from 'react';
+import { Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
 
 function RequestForms(){
-    const [validated, setValidated] = React.useState(false);
-
+    const [validated, setValidated] = useState(false);
+    let hospitalName = useRef(null)
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -12,6 +12,11 @@ function RequestForms(){
         }
 
         setValidated(true);
+
+        event.preventDefault();
+        const HospitalName = hospitalName.current.value;
+        console.log(HospitalName)
+
     };
     return(
         <>
@@ -31,6 +36,7 @@ function RequestForms(){
                                                     required
                                                     type="text"
                                                     placeholder="Enter Hospital Name"
+                                                    ref = {hospitalName}
                                                     
                                                 />
                                                 <Form.Control.Feedback type="invalid">
@@ -45,7 +51,7 @@ function RequestForms(){
                                                 <Form.Control
                                                     required
                                                     type="text"
-                                                    placeholder="Enter Owner  Name"
+                                                    placeholder="Enter Owner Name"
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide Owner name.
