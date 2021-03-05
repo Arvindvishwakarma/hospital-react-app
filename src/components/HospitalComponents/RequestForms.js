@@ -7,12 +7,12 @@ function RequestForms(){
     let ownerName = useRef(null)
     let ownerContact = useRef(null)
     let ownerEmail = useRef(null)
-    let hospitalPassword = useRef(null)
     let hospitalReg = useRef(null)
     let hospitalType = useRef(null)
     let hospitalGovernment = useRef(null)
     let hospitalAddress = useRef(null)
     let hospitalPincode = useRef(null)
+    let hospitalPassword = useRef(null)
     let hospitalState = useRef(null)
     let hospitalDistrict = useRef(null)
     let hospitalWebsite = useRef(null)
@@ -33,12 +33,12 @@ function RequestForms(){
         const OwnerName = ownerName.current.value;
         const OwnerContact = ownerContact.current.value;
         const OwnerEmail = ownerEmail.current.value;
-        const HospitalPassword = hospitalPassword.current.value;
         const HospitalReg = hospitalReg.current.value;
         const HospitalType = hospitalType.current.value;
         const HospitalGovernment = hospitalGovernment.current.value;
         const HospitalAddress = hospitalAddress.current.value;
         const HospitalPincode = hospitalPincode.current.value;
+        const HospitalPassword = hospitalPassword.current.value;
         const HospitalState = hospitalState.current.value;
         const HospitalDistrict = hospitalDistrict.current.value;
         const HospitalWebsite = hospitalWebsite.current.value;
@@ -50,12 +50,12 @@ function RequestForms(){
             OwnerName,
             OwnerContact,
             OwnerEmail,
-            HospitalPassword,
             HospitalReg,
             HospitalType,
             HospitalGovernment,
             HospitalAddress,
             HospitalPincode,
+            HospitalPassword,
             HospitalState,
             HospitalDistrict,
             HospitalWebsite,
@@ -81,8 +81,7 @@ function RequestForms(){
                     ownerName: "${OwnerName}"
                     ownerContactNo: "${OwnerContact}"
                     ownerEmail:"${OwnerEmail}"
-                    
-                   hospitalPassword:"${HospitalPassword}"
+                    hospitalPassword:"${HospitalPassword}"
                     status:"Pending"
                 })
                 {
@@ -274,7 +273,7 @@ function RequestForms(){
                                                 <Form.Label>Password</Form.Label>
                                                 <Form.Control
                                                     required
-                                                    type="text"
+                                                    type="password"
                                                     placeholder="Enter Password"
                                                     ref = {hospitalPassword}
                                                 />

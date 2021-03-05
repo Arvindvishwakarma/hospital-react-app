@@ -44,7 +44,7 @@ function Table() {
             //console.log(resData);
             const fetchHospitals = resData.data.getHospital;
             setHospitals(fetchHospitals);
-            console.log(fetchHospitals)
+            //console.log(fetchHospitals)
         })
         .catch(err => {
             console.log(err);
@@ -54,14 +54,14 @@ function Table() {
 
 
 
-    // const hospitalList = stateHospital.map( number => 
-    //             number.hospitalName
-    // )
-    //        console.log(hospitalList)
+    const hospitalList = stateHospital.map( number => 
+                number.hospitalName
+    )
+           //console.log(hospitalList)
 
 
 
-//     const { SearchBar } = Search;
+//   const { SearchBar } = Search;
 //     const details=[{
 //         name:'Sagar Shree',
 //         city: 'Sagar',
@@ -80,7 +80,6 @@ function Table() {
 //         state: "Madhya Pradesh",
 //         show: <Button variant="warning" size="sm">Show Details</Button>
 //     },
-
     
 // ]
 
@@ -122,30 +121,11 @@ function Table() {
         //                 <SearchBar {...props.searchProps}/>
         //                 <hr />
         //                 <BootstrapTable {...props.baseProps}/>
-        //                 <table border='1'>
-        //                     <thead>
-        //                         <tr>
-        //                             <td>Hospital Name</td>
-        //                             <td>Hospital Status</td>
-        //                         </tr>
-        //                         {
-        //                             stateHospital.map(hos => 
-        //                                 <tr>
-        //                                     <td>{hos.hospitalName}</td>
-        //                                     <td>{hos.status}</td>
-        //                                 </tr>  
-        //                             )
-        //                         }
-        //                     </thead>
-        //                 </table>
-        //                { 
-                           
-        //                 }
         //             </div>
         //         )
         //     }
            
-        // </ToolkitProvider>
+        //     </ToolkitProvider> 
 
         <div>
              <table border='1'>
@@ -167,7 +147,7 @@ function Table() {
                                  }
                              </thead>
                         </table>
-        </div>
+        </div> 
         
 
 
