@@ -1,5 +1,6 @@
 import { Nav, Tab, Row, Col } from 'react-bootstrap';
-import Table from './Table';
+import Table from './AllHospitals';
+import PendingHospitals from './PendingHospitals';
 
 function Sidebar() {
 
@@ -11,19 +12,10 @@ function Sidebar() {
                     <Col sm={2} style={{backgroundColor:'#34495e'}}>
                         <Nav variant="pills" className="flex-column">
                             <Nav.Item>
-                                <Nav.Link eventKey="first" style={{color:'white', fontSize:'20px',padding:'10px'}}>All Hospitals</Nav.Link>
+                                <Nav.Link eventKey="first" style={{color:'white', fontSize:'20px',padding:'10px'}}>Active Hospitals</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="second" style={{color:'white', fontSize:'20px',padding:'10px'}}>Details</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="third" style={{color:'white', fontSize:'20px',padding:'10px'}}>Request</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="fourth" style={{color:'white', fontSize:'20px',padding:'10px'}}>All Hospitals</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="fifth" style={{color:'white', fontSize:'20px',padding:'10px'}}>Edit Hospital</Nav.Link>
+                                <Nav.Link eventKey="second" style={{color:'white', fontSize:'20px',padding:'10px'}}>Pending Hospitals</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Col>
@@ -33,7 +25,7 @@ function Sidebar() {
                                 <Table />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">
-                                <Details />
+                                <PendingHospitals />
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
                                 <Request />
@@ -52,13 +44,6 @@ function Sidebar() {
     )
 }
 
-
-
-function Details() {
-    return (
-        <h1>Details</h1>
-    )
-}
 
 function Request() {
     return (
