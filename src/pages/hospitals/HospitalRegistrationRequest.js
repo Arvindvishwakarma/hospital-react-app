@@ -1,5 +1,4 @@
 import RequestForm from '../../components/HospitalComponents/RequestForms';
-
 function HospitalRegistrationRequest(){
     return(
         <>

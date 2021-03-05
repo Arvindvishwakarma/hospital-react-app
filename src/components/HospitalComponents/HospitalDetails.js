@@ -4,7 +4,7 @@ function HospitalDetails(){
 
     return(
         <>
-            <h1>Hospital Details</h1>
+            <h1>Hospital  Details</h1>
         </>
     )
 }
