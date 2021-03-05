@@ -12,40 +12,43 @@ function handleChange(i, event) {
   values[i].value = event.target.value;
   setFields(values);
 }
-function handleDocChange(j, events) {
-    const Doc_values = [...docfields];
-    Doc_values[j].value = events.target.value;
-    docsetFields(Doc_values);
-  }
 
 function handleAdd() {
   const values = [...fields];
   values.push({ value: null });
   setFields(values);
 }
-function handleDocAdd() {
-    const Doc_values = [...docfields];
-    Doc_values.push({ value: null });
-    docsetFields(Doc_values);
-  }
 
 function handleRemove(i) {
   const values = [...fields];
   values.splice(i, 1);
   setFields(values);
 }
-function handleDocRemove(j) {
+
+
+
+function handleDocChange(j, events) {
+  const Doc_values = [...docfields];
+  Doc_values[j].value = events.target.value;
+  docsetFields(Doc_values);
+}
+
+function handleDocAdd() {
+    const Doc_values = [...docfields];
+    Doc_values.push({ value: null });
+    docsetFields(Doc_values);
+  }
+
+  function handleDocRemove(j) {
     const Doc_values = [...docfields];
     Doc_values.splice(j, 1);
     docsetFields(Doc_values);
   }
-console.log(fields)
+console.log('Warde', fields)
+console.log('Doctors', docfields)
     return(
         
       <div className="App">
-
-
-
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Wards: </Form.Label>
