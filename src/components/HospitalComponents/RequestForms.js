@@ -7,10 +7,12 @@ function RequestForms(){
     let ownerName = useRef(null)
     let ownerContact = useRef(null)
     let ownerEmail = useRef(null)
+    let hospitalPassword = useRef(null)
     let hospitalReg = useRef(null)
     let hospitalType = useRef(null)
     let hospitalGovernment = useRef(null)
     let hospitalAddress = useRef(null)
+    let hospitalPincode = useRef(null)
     let hospitalState = useRef(null)
     let hospitalDistrict = useRef(null)
     let hospitalWebsite = useRef(null)
@@ -31,10 +33,12 @@ function RequestForms(){
         const OwnerName = ownerName.current.value;
         const OwnerContact = ownerContact.current.value;
         const OwnerEmail = ownerEmail.current.value;
+        const HospitalPassword = hospitalPassword.current.value;
         const HospitalReg = hospitalReg.current.value;
         const HospitalType = hospitalType.current.value;
         const HospitalGovernment = hospitalGovernment.current.value;
         const HospitalAddress = hospitalAddress.current.value;
+        const HospitalPincode = hospitalPincode.current.value;
         const HospitalState = hospitalState.current.value;
         const HospitalDistrict = hospitalDistrict.current.value;
         const HospitalWebsite = hospitalWebsite.current.value;
@@ -46,10 +50,12 @@ function RequestForms(){
             OwnerName,
             OwnerContact,
             OwnerEmail,
+            HospitalPassword,
             HospitalReg,
             HospitalType,
             HospitalGovernment,
             HospitalAddress,
+            HospitalPincode,
             HospitalState,
             HospitalDistrict,
             HospitalWebsite,
@@ -68,14 +74,15 @@ function RequestForms(){
                     address:"${HospitalAddress}"
                     state: "${HospitalState}"
                     district: "${HospitalDistrict}"
-                    pincode: "456"
+                    pincode: "${HospitalPincode}"
                     website: "${HospitalWebsite}"
                     lognitude:"${HospitalLongitude}"
                     latitude: "${HospitalLatitude}"
                     ownerName: "${OwnerName}"
                     ownerContactNo: "${OwnerContact}"
                     ownerEmail:"${OwnerEmail}"
-                    password:"123"
+                    
+                   hospitalPassword:"${HospitalPassword}"
                     status:"Pending"
                 })
                 {
@@ -251,6 +258,34 @@ function RequestForms(){
                                         </Form.Row>
                                         <Form.Row>
                                             <Form.Group as={Col} md="6" controlId="validationCustom09">
+                                                <Form.Label>Hospital Pincode</Form.Label>
+                                                <Form.Control
+                                                    required
+                                                    type="text"
+                                                    placeholder="Enter pincode"
+                                                    ref = {hospitalPincode}
+                                                />
+                                                <Form.Control.Feedback type="invalid">
+                                                    Please enter Correct pincode.
+                                                </Form.Control.Feedback>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+                                            <Form.Group as={Col} md="6" controlId="validationCustom10">
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control
+                                                    required
+                                                    type="text"
+                                                    placeholder="Enter Password"
+                                                    ref = {hospitalPassword}
+                                                />
+                                                <Form.Control.Feedback type="invalid">
+                                                    Please enter Correct Password.
+                                                </Form.Control.Feedback>
+                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                                            </Form.Group>
+                                        </Form.Row>
+                                        <Form.Row>
+                                            <Form.Group as={Col} md="6" controlId="validationCustom09">
                                                 <Form.Label>State in which hospital Located</Form.Label>
                                                 <Form.Control
                                                     required
@@ -277,6 +312,7 @@ function RequestForms(){
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
                                         </Form.Row>
+
                                         <Form.Row>
                                             <Form.Group as={Col} md="12" controlId="validationCustom11">
                                                 <Form.Label>Hospital Website:</Form.Label>
