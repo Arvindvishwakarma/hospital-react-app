@@ -1,5 +1,5 @@
 import React, {  useState} from 'react';
-import {Form, Button} from 'react-bootstrap';
+import {Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
 
 
 function HospitalDetails(){
@@ -42,93 +42,108 @@ function handleDocRemove(j) {
 console.log(fields)
     return(
         
-      <div className="App">
+        <Container style={{ marginTop: '30px'}} >
+        <Card style={{borderRadius:'30px 30px 30px 30px'}}>
+        <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Hospital Details Filling</Card.Header>
+            <Card.Body style={{marginTop:'-20px',marginBottom: '-20px'}}>
+                <Row>
+                   
+                    <Col md={10} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px',justifyContent:'center'}}>
+                    <Form>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Wards: </Form.Label>
+                  <Button type="button" onClick={() => handleAdd()} variant="primary">
+                    +
+                  </Button>
+                  {fields.map((field, idx) => {
+                return (
+                  <div key={`${field}-${idx}`}>
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Enter Wards"
+                  onChange={e => handleChange(idx, e)}
+                   />
+                    <Button type="button" onClick={() => handleRemove(idx)} variant="danger">
+                      X
+                    </Button>
+                  </div>
+                );
+              })}
+                </Form.Group>
+        
+              <hr></hr>
+        
+              <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Doctors: </Form.Label>
+                  <Button type="button" onClick={() => handleDocAdd()} variant="primary">
+                    +
+                  </Button>
+                  {docfields.map((field, idx) => {
+                return (
+                  <div key={`${field}-${idx}`}>
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Enter Wards"
+                  onChange={e => handleDocChange(idx, e)}
+                   />
+        
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Enter Wards"
+                  onChange={e => handleDocChange(idx, e)}
+                   />
+        
+                  <Form.Control 
+                  type="text" 
+                  placeholder="Enter Wards"
+                  onChange={e => handleDocChange(idx, e)}
+                   />
+                    <Button type="button" onClick={() => handleDocRemove(idx)} variant="danger">
+                      X
+                    </Button>
+        
+        
+        
+                 
+                    
+                  </div>
+                  
+                );
+              })}
+                </Form.Group>
+        
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Beds: </Form.Label>
+                  <br></br>
+                  <Form.Label>Private Beds: </Form.Label>
+                  <Form.Control type="text" placeholder="Enter Private Beds" />
+                  <Form.Label>General Beds: </Form.Label>
+                  <Form.Control type="text" placeholder="Enter General Beds" />
+                  </Form.Group>
+        
+        
+                 <center>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button></center>
+              </Form>
+                   
+                    </Col>
+                </Row>
+            </Card.Body>
+        </Card>
+         </Container>
 
 
 
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Wards: </Form.Label>
-          <Button type="button" onClick={() => handleAdd()} variant="primary">
-            +
-          </Button>
-          {fields.map((field, idx) => {
-        return (
-          <div key={`${field}-${idx}`}>
-          <Form.Control 
-          type="text" 
-          placeholder="Enter Wards"
-          onChange={e => handleChange(idx, e)}
-           />
-            <Button type="button" onClick={() => handleRemove(idx)} variant="danger">
-              X
-            </Button>
-          </div>
-        );
-      })}
-        </Form.Group>
+    
 
-      <hr></hr>
-
-      <Form.Group controlId="formBasicEmail">
-          <Form.Label>Doctors: </Form.Label>
-          <Button type="button" onClick={() => handleDocAdd()} variant="primary">
-            +
-          </Button>
-          {docfields.map((field, idx) => {
-        return (
-          <div key={`${field}-${idx}`}>
-          <Form.Control 
-          type="text" 
-          placeholder="Enter Wards"
-          onChange={e => handleDocChange(idx, e)}
-           />
-
-          <Form.Control 
-          type="text" 
-          placeholder="Enter Wards"
-          onChange={e => handleDocChange(idx, e)}
-           />
-
-          <Form.Control 
-          type="text" 
-          placeholder="Enter Wards"
-          onChange={e => handleDocChange(idx, e)}
-           />
-            <Button type="button" onClick={() => handleDocRemove(idx)} variant="danger">
-              X
-            </Button>
-
-
-
-         
-            
-          </div>
-          
-        );
-      })}
-        </Form.Group>
-
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Beds: </Form.Label>
-          <br></br>
-          <Form.Label>Private Beds: </Form.Label>
-          <Form.Control type="text" placeholder="Enter Private Beds" />
-          <Form.Label>General Beds: </Form.Label>
-          <Form.Control type="text" placeholder="Enter General Beds" />
-          </Form.Group>
-
-
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-
-    </div>
+   
   );
     
 
 
 }
 export default HospitalDetails;
+
+
