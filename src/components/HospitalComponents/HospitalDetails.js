@@ -5,24 +5,40 @@ import {Form, Button} from 'react-bootstrap';
 function HospitalDetails(){
 
 const [fields, setFields] = useState([{ value: null }]);
+const [docfields, docsetFields] = useState([{ value: null }]);
 
 function handleChange(i, event) {
   const values = [...fields];
   values[i].value = event.target.value;
   setFields(values);
 }
+function handleDocChange(j, events) {
+    const Doc_values = [...docfields];
+    Doc_values[j].value = events.target.value;
+    docsetFields(Doc_values);
+  }
 
 function handleAdd() {
   const values = [...fields];
   values.push({ value: null });
   setFields(values);
 }
+function handleDocAdd() {
+    const Doc_values = [...docfields];
+    Doc_values.push({ value: null });
+    docsetFields(Doc_values);
+  }
 
 function handleRemove(i) {
   const values = [...fields];
   values.splice(i, 1);
   setFields(values);
 }
+function handleDocRemove(j) {
+    const Doc_values = [...docfields];
+    Doc_values.splice(j, 1);
+    docsetFields(Doc_values);
+  }
 console.log(fields)
     return(
         
@@ -56,30 +72,30 @@ console.log(fields)
 
       <Form.Group controlId="formBasicEmail">
           <Form.Label>Doctors: </Form.Label>
-          <Button type="button" onClick={() => handleAdd()} variant="primary">
+          <Button type="button" onClick={() => handleDocAdd()} variant="primary">
             +
           </Button>
-          {fields.map((field, idx) => {
+          {docfields.map((field, idx) => {
         return (
           <div key={`${field}-${idx}`}>
           <Form.Control 
           type="text" 
           placeholder="Enter Wards"
-          onChange={e => handleChange(idx, e)}
+          onChange={e => handleDocChange(idx, e)}
            />
 
           <Form.Control 
           type="text" 
           placeholder="Enter Wards"
-          onChange={e => handleChange(idx, e)}
+          onChange={e => handleDocChange(idx, e)}
            />
 
           <Form.Control 
           type="text" 
           placeholder="Enter Wards"
-          onChange={e => handleChange(idx, e)}
+          onChange={e => handleDocChange(idx, e)}
            />
-            <Button type="button" onClick={() => handleRemove(idx)} variant="danger">
+            <Button type="button" onClick={() => handleDocRemove(idx)} variant="danger">
               X
             </Button>
 
