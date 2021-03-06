@@ -1,31 +1,45 @@
 import React, {  useState} from 'react';
-import {Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
+import {Card, Container, Row , Col ,Form, Button, Table} from 'react-bootstrap';
 
 
 function HospitalDetails(){
 
-const [fields, setFields] = useState([{ value: null }]);
-const [docfields, docsetFields] = useState([{ value: null }]);
+const [fields, setFields] = useState([{ wards: null }]);
+const [docfields, docsetFields] = useState([{}]);
 
 function handleChange(i, event) {
   const values = [...fields];
   values[i].value = event.target.value;
   setFields(values);
 }
-function handleDocChange(j, events) {
+
+
+function handleDocChange1(j, events) {
     const Doc_values = [...docfields];
-    Doc_values[j].value = events.target.value;
+    Doc_values[j].docName = events.target.value;
+    docsetFields(Doc_values);
+  }
+
+  function handleDocChange2(j, events) {
+    const Doc_values = [...docfields];
+    Doc_values[j].docReg = events.target.value;
+    docsetFields(Doc_values);
+  }
+
+  function handleDocChange3(j, events) {
+    const Doc_values = [...docfields];
+    Doc_values[j].docSp = events.target.value;
     docsetFields(Doc_values);
   }
 
 function handleAdd() {
   const values = [...fields];
-  values.push({ value: null });
+  values.push({ wards: null });
   setFields(values);
 }
 function handleDocAdd() {
     const Doc_values = [...docfields];
-    Doc_values.push({ value: null });
+    Doc_values.push({});
     docsetFields(Doc_values);
   }
 
@@ -39,7 +53,17 @@ function handleDocRemove(j) {
     Doc_values.splice(j, 1);
     docsetFields(Doc_values);
   }
-console.log(fields)
+  
+console.log("Wards:",fields)
+console.log("Doctors",docfields)
+
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+
+}
+
     return(
         
         <Container style={{ marginTop: '30px'}} >
@@ -49,7 +73,7 @@ console.log(fields)
                 <Row>
                    
                     <Col md={10} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px',justifyContent:'center'}}>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Wards: </Form.Label>
                   <Button type="button" onClick={() => handleAdd()} variant="primary">
@@ -84,19 +108,19 @@ console.log(fields)
                   <Form.Control 
                   type="text" 
                   placeholder="Enter Wards"
-                 onChange={e => handleDocChange(idx, e)}
+                 onChange={e => handleDocChange1(idx, e)}
                    />
         
                   <Form.Control 
                   type="text" 
                   placeholder="Enter Wards"
-                 onChange={e => handleDocChange(idx, e)}
+                 onChange={e => handleDocChange2(idx, e)}
                    />
         
                   <Form.Control 
                   type="text" 
                   placeholder="Enter Wards"
-                  onChange={e => handleDocChange(idx, e)}
+                  onChange={e => handleDocChange3(idx, e)}
                    />
                     <Button type="button" onClick={() => handleDocRemove(idx)} variant="danger">
                       X
@@ -135,11 +159,28 @@ console.log(fields)
                 </Row>
             </Card.Body>
         </Card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
          </Container>
 
 
 
-    
+   
 
    
   );
