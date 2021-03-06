@@ -161,6 +161,8 @@ function AllHospitals() {
 
       <Modal 
       show={show} onHide={handleClose}
+      dialogClassName="my-modal"
+      size='lg'
       >
         <Modal.Header closeButton>
           <Modal.Title>Hospital Details</Modal.Title>
