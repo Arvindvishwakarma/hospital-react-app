@@ -43,9 +43,9 @@ console.log(fields)
     return(
         
         <Container style={{ marginTop: '30px'}} >
-        <Card style={{borderRadius:'30px 30px 30px 30px'}}>
+        <Card style={{borderRadius:'30px 30px 30px 30px',backgroundColor:'ghostwhite'}}>
         <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Hospital Details Filling</Card.Header>
-            <Card.Body style={{marginTop:'-20px',marginBottom: '-20px'}}>
+            <Card.Body style={{marginTop:'-20px',marginBottom: '-150px'}}>
                 <Row>
                    
                     <Col md={10} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px',justifyContent:'center'}}>
@@ -71,7 +71,7 @@ console.log(fields)
               })}
                 </Form.Group>
         
-              <hr></hr>
+              <h1>~~~~~~~~~~~~~~~~~~~~~~</h1>
         
               <Form.Group controlId="formBasicEmail">
                   <Form.Label>Doctors: </Form.Label>
@@ -84,13 +84,13 @@ console.log(fields)
                   <Form.Control 
                   type="text" 
                   placeholder="Enter Wards"
-                  onChange={e => handleDocChange(idx, e)}
+                 onChange={e => handleDocChange(idx, e)}
                    />
         
                   <Form.Control 
                   type="text" 
                   placeholder="Enter Wards"
-                  onChange={e => handleDocChange(idx, e)}
+                 onChange={e => handleDocChange(idx, e)}
                    />
         
                   <Form.Control 
@@ -111,6 +111,9 @@ console.log(fields)
                 );
               })}
                 </Form.Group>
+
+                
+              <h1>~~~~~~~~~~~~~~~~~~~~~~</h1>
         
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Beds: </Form.Label>
