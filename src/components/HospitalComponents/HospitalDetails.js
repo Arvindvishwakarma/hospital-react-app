@@ -4,7 +4,7 @@ import {Card, Container, Row , Col ,Form, Button, Table} from 'react-bootstrap';
 
 function HospitalDetails(){
 
-const [fields, setFields] = useState([{ wards: null }]);
+const [fields, setFields] = useState([{ value: null }]);
 const [docfields, docsetFields] = useState([{}]);
 
 function handleChange(i, event) {
@@ -34,7 +34,7 @@ function handleDocChange1(j, events) {
 
 function handleAdd() {
   const values = [...fields];
-  values.push({ wards: null });
+  values.push({ value: null });
   setFields(values);
 }
 function handleDocAdd() {
@@ -61,6 +61,107 @@ console.log("Doctors",docfields)
 function handleSubmit(event) {
   event.preventDefault();
 
+        // const HospitalName = hospitalName.current.value;
+        // const OwnerName = ownerName.current.value;
+        // const OwnerContact = ownerContact.current.value;
+        // const OwnerEmail = ownerEmail.current.value;
+        // const HospitalReg = hospitalReg.current.value;
+        // const HospitalType = hospitalType.current.value;
+        // const HospitalGovernment = hospitalGovernment.current.value;
+        // const HospitalAddress = hospitalAddress.current.value;
+        // const HospitalPincode = hospitalPincode.current.value;
+        // const HospitalPassword = hospitalPassword.current.value;
+        // const HospitalState = hospitalState.current.value;
+        // const HospitalDistrict = hospitalDistrict.current.value;
+        // const HospitalWebsite = hospitalWebsite.current.value;
+        // const HospitalLongitude = hospitalLongitude.current.value;
+        // const HospitalLatitude = hospitalLatitude.current.value;
+        
+        // console.log(
+        //     HospitalName,
+        //     OwnerName,
+        //     OwnerContact,
+        //     OwnerEmail,
+        //     HospitalReg,
+        //     HospitalType,
+        //     HospitalGovernment,
+        //     HospitalAddress,
+        //     HospitalPincode,
+        //     HospitalPassword,
+        //     HospitalState,
+        //     HospitalDistrict,
+        //     HospitalWebsite,
+        //     HospitalLongitude,
+        //     HospitalLatitude,
+        // )
+        let first = docfields[0];
+        const docData =  
+                docfields.map(hos => 
+                   hos.docName
+                )
+
+              console.log(docData)
+        const dataNew = [
+          {docName:"Arvind",docReg:"2588",docSp:"Fever"},
+          {docName:"Shrikant",docReg:"5288",docSp:"Penis"},
+          {docName:"Suyash",docReg:"1234",docSp:"Ass"}
+        ]
+
+
+        const dataMap = dataNew.map((doctors) => {
+                let dataFetch = {
+                  "docName": doctors.docName,
+                  "docReg": doctors.docReg,
+                  "docSp": doctors.docSp
+                }
+                return dataFetch
+              }
+          )
+        console.log("DataFetch",dataMap)
+        const requestBody = {
+            query: `
+            mutation {
+              createHospitalDetails(id:"6040fbcbcae7d553dd4199fe",hospitalDetailsInput:{
+                wards:["${JSON.stringify(fields)}"]
+                doctors:"{docName:"dsfsf",docReg:"d",docSp:"sdf"}"
+                
+                beds:{
+                  privateBeds:55
+                  generalBeds:85
+                }
+          
+              }
+          
+          
+            )
+          
+              {
+                wards
+                
+                doctors{
+                  docName
+                  docReg
+                  docSp
+                } 
+                beds {
+                  privateBeds
+                  generalBeds
+                }
+              }
+            }
+            `
+        };
+
+
+
+        fetch('http://localhost:4000/graphql',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(requestBody),
+        });
 
 }
 
@@ -71,7 +172,7 @@ function handleSubmit(event) {
         <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Hospital Details Filling</Card.Header>
             <Card.Body style={{marginTop:'-20px',marginBottom: '-150px'}}>
                 <Row>
-                   
+
                     <Col md={10} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px',justifyContent:'center'}}>
                     <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
@@ -160,12 +261,51 @@ function handleSubmit(event) {
             </Card.Body>
         </Card>
 
+     
 
 
 
 
 
 
+        <Table bordered hover>
+                          <thead>
+                            <tr>
+                              <th>Hospital Name</th>
+                              <th>Registration No</th>
+                              <th>Type</th>
+                              <th>Owner Name</th>
+                              <th>Status</th>
+                              <th>Show Details</th>
+                              <th>Confirm</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {
+                                    
+                            fields.map(hos => 
+                                       <tr>
+
+                                            <td>{hos.value}</td>
+                                            
+                                        </tr>  
+                                    )
+                                }
+
+                                {
+                                    
+                                    docfields.map(hos => 
+                                               <tr>
+        
+                                                    <td>{hos.docName}</td>
+                                                    <td>{hos.docReg}</td>
+                                                    <td>{hos.docSp}</td>
+                                                    
+                                                </tr>  
+                                            )
+                                        }
+                          </tbody>
+                        </Table>
 
 
 
