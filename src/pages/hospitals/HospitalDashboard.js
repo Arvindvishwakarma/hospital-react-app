@@ -1,6 +1,8 @@
+import HospitalDataShow from '../../components/HospitalComponents/HospitalDataShow'
+
 function HospitalDashboard(){
     return(
-        <h1>HospitalDashboard Page</h1>
+        <HospitalDataShow />
     )
 }
 
