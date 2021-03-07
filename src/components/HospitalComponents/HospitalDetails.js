@@ -4,7 +4,7 @@ import {Card, Container, Row , Col ,Form, Button, Table} from 'react-bootstrap';
 
 function HospitalDetails(){
 
-const [fields, setFields] = useState([{ wards: null }]);
+const [fields, setFields] = useState([{ }]);
 const [docfields, docsetFields] = useState([{}]);
 
 function handleChange(i, event) {
@@ -34,7 +34,7 @@ function handleDocChange1(j, events) {
 
 function handleAdd() {
   const values = [...fields];
-  values.push({ wards: null });
+  values.push({});
   setFields(values);
 }
 function handleDocAdd() {
@@ -69,7 +69,7 @@ function handleSubmit(event) {
         <Container style={{ marginTop: '30px'}} >
         <Card style={{borderRadius:'30px 30px 30px 30px',backgroundColor:'ghostwhite'}}>
         <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Hospital Details Filling</Card.Header>
-            <Card.Body style={{marginTop:'-20px',marginBottom: '-150px'}}>
+            <Card.Body style={{marginTop:'-20px',marginBottom: '-100px'}}>
                 <Row>
                    
                     <Col md={10} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px',justifyContent:'center'}}>
