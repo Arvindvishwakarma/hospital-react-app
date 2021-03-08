@@ -61,83 +61,34 @@ console.log("Doctors",docfields)
 function handleSubmit(event) {
   event.preventDefault();
 
-        // const HospitalName = hospitalName.current.value;
-        // const OwnerName = ownerName.current.value;
-        // const OwnerContact = ownerContact.current.value;
-        // const OwnerEmail = ownerEmail.current.value;
-        // const HospitalReg = hospitalReg.current.value;
-        // const HospitalType = hospitalType.current.value;
-        // const HospitalGovernment = hospitalGovernment.current.value;
-        // const HospitalAddress = hospitalAddress.current.value;
-        // const HospitalPincode = hospitalPincode.current.value;
-        // const HospitalPassword = hospitalPassword.current.value;
-        // const HospitalState = hospitalState.current.value;
-        // const HospitalDistrict = hospitalDistrict.current.value;
-        // const HospitalWebsite = hospitalWebsite.current.value;
-        // const HospitalLongitude = hospitalLongitude.current.value;
-        // const HospitalLatitude = hospitalLatitude.current.value;
-        
-        // console.log(
-        //     HospitalName,
-        //     OwnerName,
-        //     OwnerContact,
-        //     OwnerEmail,
-        //     HospitalReg,
-        //     HospitalType,
-        //     HospitalGovernment,
-        //     HospitalAddress,
-        //     HospitalPincode,
-        //     HospitalPassword,
-        //     HospitalState,
-        //     HospitalDistrict,
-        //     HospitalWebsite,
-        //     HospitalLongitude,
-        //     HospitalLatitude,
-        // )
-        let first = docfields[0];
-        const docData =  
-                docfields.map(hos => 
-                   hos.docName
-                )
-
-              console.log(docData)
         const dataNew = [
           {docName:"Arvind",docReg:"2588",docSp:"Fever"},
-          {docName:"Shrikant",docReg:"5288",docSp:"Penis"},
+          {docName:"Shrikant",docReg:"5288",docSp:"Covid"},
           {docName:"Suyash",docReg:"1234",docSp:"Ass"}
         ]
 
-
-        const dataMap = dataNew.map((doctors) => {
-                let dataFetch = {
-                  "docName": doctors.docName,
-                  "docReg": doctors.docReg,
-                  "docSp": doctors.docSp
-                }
-                return dataFetch
-              }
-          )
-        console.log("DataFetch",dataMap)
+        console.log("DataNew",dataNew)
         const requestBody = {
             query: `
             mutation {
               createHospitalDetails(id:"6040fbcbcae7d553dd4199fe",hospitalDetailsInput:{
-                wards:["icu","fever"]
-                doctors:"{docName:"dsfsf",docReg:"d",docSp:"sdf"}"
-                
+                wards:["${fields.map(doc=>doc.value)}"]
+                doctors:
+                [{
+                 docName:"${docfields.map(doc=>doc.docName)}"
+                 docReg: "${docfields.map(doc=>doc.docReg)}"
+                 docSp: "${docfields.map(doc=>doc.docSp)}"}
+                ]
+                  
                 beds:{
                   privateBeds:55
                   generalBeds:85
                 }
-          
               }
-          
-          
             )
           
               {
                 wards
-                
                 doctors{
                   docName
                   docReg
