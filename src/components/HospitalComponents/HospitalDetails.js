@@ -122,7 +122,7 @@ function handleSubmit(event) {
             query: `
             mutation {
               createHospitalDetails(id:"6040fbcbcae7d553dd4199fe",hospitalDetailsInput:{
-                wards:["${JSON.stringify(fields)}"]
+                wards:["icu","fever"]
                 doctors:"{docName:"dsfsf",docReg:"d",docSp:"sdf"}"
                 
                 beds:{
