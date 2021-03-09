@@ -1,21 +1,26 @@
-import React from 'react';
-import { Card, Container, Row , Col ,Form, Button,handleSubmit,validated} from 'react-bootstrap';
+import {React, useRef} from 'react';
+import { Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
 
 function AdminLogin(){
-    const [validated, setValidated] = React.useState(false);
+
+     let adminId = useRef(null)
+     let password = useRef(null)
 
     const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+
+        const AdminId = adminId.current.value;
+        const Password = password.current.value;
+
+        if(AdminId.trim().length === 0 || Password.trim().length === 0){
+            return;
         }
 
-        setValidated(true);
+        console.log(AdminId, password);
     };
     return(
         <>
-     <Container style={{ marginTop: '30px' }} >
+    <Container style={{ marginTop: '30px' }} >
     <Card style={{borderRadius:'30px 30px 30px 30px'}}>
     <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Admin Login </Card.Header>
         <Card.Body style={{marginTop:'-20px',marginBottom: '-20px'}}>
@@ -24,40 +29,34 @@ function AdminLogin(){
                 </Col>
                 <Col md={7} style={{marginLeft:'5px', padding:'112px',borderRadius:'10px'}}>
                 
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form  onSubmit={handleSubmit}>
                                         <Form.Row>
-                                            <Form.Group as={Col} md="12" controlId="validationCustom01" >
-                                                <Form.Label>Login Id</Form.Label>
+                                            <Form.Group as={Col} md="12">
+                                                <Form.Label>Admin Login Id</Form.Label>
                                                 <Form.Control
                                                     required
                                                     type="text"
                                                     placeholder="Enter Login Id"
+                                                    ref={adminId}
                                                     
                                                 />
-                                                <Form.Control.Feedback type="invalid">
-                                                   Enter Login Id
-                                                </Form.Control.Feedback>
-                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
                                         </Form.Row>
 
                                         <Form.Row>
-                                            <Form.Group as={Col} md="12" controlId="validationCustom02">
+                                            <Form.Group as={Col} md="12">
                                                 <Form.Label>Password</Form.Label>
                                                 <Form.Control
                                                     required
                                                     type="password"
                                                     placeholder="Enter Password"
+                                                    ref={password}
                                                 />
-                                                <Form.Control.Feedback type="invalid">
-                                                Enter Password
-                                                </Form.Control.Feedback>
-                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
                                             </Form.Row>         
-                                        <Button id="login-btn">Log In</Button>
+                                        <Button type="submit">Log In</Button>
                                     </Form>
-                                    <center>Don't have an account? <a href="#" ids="register_here">Register here</a></center>
+                                    <center>Don't have an account? Register here</center>
                                     
                 </Col>
             </Row>
