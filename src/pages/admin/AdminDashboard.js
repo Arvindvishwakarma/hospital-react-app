@@ -1,6 +1,5 @@
 import {Container, Row, Col} from 'react-bootstrap'
 import Sidebar from '../../components/AdminComponents/Sidebar'
-import {Route, Switch} from 'react-router-dom';
 function AdminDashboard() {
     return (
         <>
