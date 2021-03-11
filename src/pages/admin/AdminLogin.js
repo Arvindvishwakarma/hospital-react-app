@@ -2,7 +2,6 @@ import {React, useRef} from 'react';
 import { Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
 
 function AdminLogin(){
-
      let adminId = useRef(null)
      let password = useRef(null)
 
@@ -17,6 +16,59 @@ function AdminLogin(){
         }
 
         console.log(AdminId, password);
+
+        // const requestBody = {
+        //     query: `
+        //         mutation{
+        //             createAdmin(AdminInput:{
+        //                 adminId:"${AdminId}"
+        //                 password:"${Password}"
+        //                 role:"super"
+        //               })
+        //               {
+        //                 _id
+        //                 adminId
+        //                 password
+        //                 role
+        //               }
+        //         }
+
+        //     `
+        // };
+
+        const requestBody = {
+            query: `
+                query{
+                    adminLogin(loginId:"${AdminId}",password:"${Password}")
+                    {
+                        adminId
+                        token
+                        tokenExpiration
+                    }
+                }
+
+            `
+        };
+
+        
+        fetch('http://localhost:4000/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if(res.status !== 200 && res.status !== 201){
+                throw new Error('Failed')
+            }
+            return res.json()
+        })
+        .then(resData => {
+            console.log(resData)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     };
     return(
         <>

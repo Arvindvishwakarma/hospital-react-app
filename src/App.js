@@ -1,4 +1,5 @@
 import './App.css';
+import {React} from 'react'
 import NavbarMenu from './components/NavbarMenu';
 import Home from './pages/Home';
 import Objectives from './pages/Objectives';
@@ -13,10 +14,10 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
 
-
 import {Route, Switch} from 'react-router-dom';
 
 function App() {
+
   return (
     <div className="App">
       <NavbarMenu />
