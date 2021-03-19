@@ -1,5 +1,5 @@
 import './App.css';
-import {React} from 'react'
+import {React, useState} from 'react'
 import NavbarMenu from './components/NavbarMenu';
 import Home from './pages/Home';
 import Objectives from './pages/Objectives';
@@ -15,13 +15,34 @@ import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
 import MapWork from './pages/mapWork';
 
+import AuthContext from './context/auth-context';
+
 import {Route, Switch} from 'react-router-dom';
 
 function App() {
 
+  const [stateToken, setStateToken] = useState(null);
+  const [stateAdminId, setStateAdminId] = useState(null);
+
+  function login(adminId, token, tokenExpiration) {
+    setStateAdminId(adminId);
+    setStateToken(token);
+  }
+
+  function logout(){
+    setStateAdminId(null);
+    setStateToken(null);
+  }
+
   return (
     <div className="App">
       <NavbarMenu />
+      <AuthContext.Provider value={{
+        adminId: stateAdminId,
+        token: stateToken,
+        login: login,
+        logout: logout
+      }}>
       <Switch>
         <Route path="/" exact={true}><Home /></Route>
         <Route path="/objectives"><Objectives /></Route>
@@ -38,6 +59,7 @@ function App() {
         <Route path="/mapWork"><MapWork /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
+       </AuthContext.Provider>
     </div>
   );
 }

@@ -1,9 +1,12 @@
-import {React, useRef} from 'react';
+import {React, useRef, useState} from 'react';
 import { Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
+import AuthContext from '../../context/auth-context';
 
 function AdminLogin(){
      let adminId = useRef(null)
      let password = useRef(null)
+
+    const [isLogin, setIsLogin] = useState(true);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -65,6 +68,13 @@ function AdminLogin(){
         })
         .then(resData => {
             console.log(resData)
+            if(resData.data.adminLogin.token) {
+                AuthContext.login(
+                    resData.data.adminLogin.adminId,
+                    resData.data.adminLogin.token,
+                    resData.data.adminLogin.tokenExpiration
+                    )
+            }
         })
         .catch(err => {
             console.log(err)
