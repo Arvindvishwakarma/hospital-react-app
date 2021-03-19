@@ -14,7 +14,6 @@ function DisplayBeds() {
   },[])
 
 
-    
     function fetchBedsData(){
         const requestBody = {
             query: `
@@ -24,6 +23,8 @@ function DisplayBeds() {
                     _id
                     privateBeds
                     generalBeds
+
+
                   }
               }
             `
@@ -67,8 +68,10 @@ function DisplayBeds() {
                             <tr>
                               <th>Private Beds</th>
                               <th>General Beds</th>
+                              <th>Ward Name</th>
                               <th>Edit</th>
                               <th>Delete</th>
+                              
                             </tr>
                           </thead>
                           <tbody>
@@ -78,6 +81,7 @@ function DisplayBeds() {
 
                                              <td>{bed.privateBeds}</td>
                                              <td>{bed.generalBeds}</td>
+                                             <td>{(bed.generalBeds+bed.privateBeds)}</td>
                                              <td><Button variant="warning" size="sm">Edit</Button></td>
                                              <td><Button variant="danger" size="sm">Delete</Button></td>
                                          </tr>  
