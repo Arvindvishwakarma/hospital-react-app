@@ -78,6 +78,9 @@ function MapWork() {
         distance:(haversine(user, [hos.lognitude,hos.latitude ])/1000).toFixed(2),
       }) 
   )
+  location.sort(function(a,b){
+    return a.distance - b.distance ;
+  })
   console.log("Locations",location)
 
 
