@@ -76,17 +76,20 @@ function Beds() {
     if (PrivateBeds !== '' && GeneralBeds !== '') {
       const requestBody = {
         query: `
-        createBeds(id:"6040fc507675161c376443a5",BedInput:{
-          privateBeds:${PrivateBeds}
-          generalBeds:${GeneralBeds}
-          wardsName:"${WardsName}"
-        })
-        {
-          _id
-          privateBeds
-          generalBeds
-          wardsName
+        mutation{
+          createBeds(id:"604a52a7d8f0c46d091ba2ad",BedInput:{
+            privateBeds:${PrivateBeds}
+            generalBeds:${GeneralBeds}
+            wardsName:"${WardsName}"
+          })
+          {
+            _id
+            privateBeds
+            generalBeds
+            wardsName
+          }
         }
+        
                 `
       };
 

@@ -23,7 +23,7 @@ function DisplayBeds() {
                     _id
                     privateBeds
                     generalBeds
-
+                    wardsName
 
                   }
               }
@@ -56,8 +56,24 @@ function DisplayBeds() {
         });
     }
 
+    let totalPrivate = 0
+    stateBeds.map(pri=>{
+      totalPrivate=totalPrivate+pri.privateBeds
+    })
 
+    let totalGeneral = 0
+    stateBeds.map(gen=>{
+      totalGeneral=totalGeneral+gen.generalBeds
+    })
+    
+    let totalHospitalBeds = totalPrivate + totalGeneral
 
+    let bplBeds = ((totalHospitalBeds*30)/100).toFixed(0)
+
+console.log(totalPrivate)
+console.log(totalGeneral)
+console.log(totalHospitalBeds)
+console.log(bplBeds)
     return (
 
         <div>
@@ -76,12 +92,12 @@ function DisplayBeds() {
                           </thead>
                           <tbody>
                                   {
+                                    
                                     stateBeds.map(bed => 
                                         <tr key={bed._id}>
-
                                              <td>{bed.privateBeds}</td>
                                              <td>{bed.generalBeds}</td>
-                                             <td>{(bed.generalBeds+bed.privateBeds)}</td>
+                                             <td>{bed.wardsName}</td>
                                              <td><Button variant="warning" size="sm">Edit</Button></td>
                                              <td><Button variant="danger" size="sm">Delete</Button></td>
                                          </tr>  
@@ -90,6 +106,24 @@ function DisplayBeds() {
                           </tbody>
                         </Table>
 
+                        <Table bordered hover>
+                          <thead>
+                            <tr>
+                              <th>Total Private Beds</th>
+                              <th>Total General Beds</th>
+                              <th>Total Beds In Hospital</th>
+                              <th>BPL Beds In Hospital</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                                 <tr>
+                                   <td>{totalPrivate}</td>
+                                   <td>{totalGeneral}</td>
+                                   <td>{totalHospitalBeds}</td>
+                                   <td>{bplBeds}</td>
+                                 </tr>
+                          </tbody>
+                        </Table>
                 </div> 
         
 
