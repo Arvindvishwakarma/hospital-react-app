@@ -13,6 +13,7 @@ import UserRegister from './components/HospitalComponents/UserForm';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
+import MapWork from './pages/mapWork';
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/user_register"><UserRegister /></Route>
         <Route path="/hospitalDetails"><HospitalDetsils /></Route>
         <Route path="/hospitalDashboard"><HospitalDashboard /></Route>
+        <Route path="/mapWork"><MapWork /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
     </div>

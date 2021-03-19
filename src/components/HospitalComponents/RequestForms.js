@@ -66,28 +66,28 @@ function RequestForms(){
         const requestBody = {
             query: `
             mutation {
-                createHospital(input: {
-                    hospitalName: "${HospitalName}"
-                    hospitalRegistrationNo: "${HospitalReg}"
+                createHospital(input:{
+                    hospitalName:"${HospitalName}"
+                    hospitalRegistrationNo:"${HospitalReg}"
                     hospitalType:"${HospitalType}"
                     government:"${HospitalGovernment}"
                     address:"${HospitalAddress}"
-                    state: "${HospitalState}"
-                    district: "${HospitalDistrict}"
-                    pincode: "${HospitalPincode}"
-                    website: "${HospitalWebsite}"
+                    state:"${HospitalState}"
+                    district:"${HospitalDistrict}"
+                    pincode:"${HospitalPincode}"
+                    website:"${HospitalWebsite}"
                     lognitude:"${HospitalLongitude}"
-                    latitude: "${HospitalLatitude}"
-                    ownerName: "${OwnerName}"
-                    ownerContactNo: "${OwnerContact}"
+                    latitude:"${HospitalLatitude}"
+                    ownerName:"${OwnerName}"
+                    ownerContactNo:"${OwnerContact}"
                     ownerEmail:"${OwnerEmail}"
-                    hospitalPassword:"${HospitalPassword}"
+                    password:"${HospitalPassword}"
                     status:"Pending"
-                })
-                {
+                  })
+                  {
+                    _id
                     hospitalName
-                    status
-                }
+                  }
             }
             `
         };
