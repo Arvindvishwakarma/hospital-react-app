@@ -1,29 +1,44 @@
+import {React} from 'react';
 import {Container, Row, Col} from 'react-bootstrap'
 import Sidebar from '../../components/AdminComponents/Sidebar'
+import {Redirect, useHistory} from 'react-router-dom';
+import NavbarMenu from '../../components/NavbarMenu'
+import jwt from 'jsonwebtoken'
+
 function AdminDashboard() {
-    return (
-        <>
-            <Container>
-                <Row>
-                    <Col>
-                        <h1 style={{textAlign:'center',marginTop:'30px'}}>Admin Dashboard</h1>
-                    </Col>
-                </Row>
-            </Container>
+    const history = useHistory()
+    const AdminToken = localStorage.getItem('token')
 
-            <Container fluid>
+      if(!AdminToken){
+        return <Redirect to = "/admin_login" />
+    }
 
-                <Sidebar />
-                    {/* <Col xs={2} id="sidebar-wrapper">      
-                      
-                    </Col> */}
-                    {/* <Col  xs={10} id="page-content-wrapper">
-                    </Col>  */}
+    jwt.verify(AdminToken, 'superAdminSecretKey', function(err, decoded) {
+        if (err) {
+            history.push("/logout")
+            
+        }
+      });
+        return (
+            <>
+            <NavbarMenu />
+                <Container>
+                    <Row>
+                        <Col>
+                            <h1 style={{textAlign:'center',marginTop:'30px'}}>Admin Dashboard</h1>
+                        </Col>
+                    </Row>
+                </Container>
+    
+                <Container fluid>
+    
+                    <Sidebar />
+    
+                </Container>
+            </>
+        )
+    }
 
-            </Container>
-        </>
-    )
-}
 
 
 export default AdminDashboard;

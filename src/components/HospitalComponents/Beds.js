@@ -90,7 +90,7 @@ function Beds() {
           }
         }
         
-                `
+           `
       };
 
 
@@ -110,8 +110,6 @@ function Beds() {
       alert("Enter Somthing.")
       event.target.reset();
     }
-
-
 
   };
 

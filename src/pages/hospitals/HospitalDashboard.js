@@ -1,8 +1,10 @@
 import {Container, Row, Col} from 'react-bootstrap'
 import Sidebar from '../../components/HospitalComponents/Sidebar'
+import NavbarMenu from '../../components/NavbarMenu';
 function HospitalDashboard() {
     return (
         <>
+        <NavbarMenu />
             <Container>
                 <Row>
                     <Col>

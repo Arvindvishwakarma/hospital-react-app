@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Container, Row , Col ,Form, Button,handleSubmit,validated} from 'react-bootstrap';
+import NavbarMenu from '../../components/NavbarMenu';
 
 function HospitalLogin(){
     const [validated, setValidated] = React.useState(false);
@@ -15,6 +16,7 @@ function HospitalLogin(){
     };
     return(
         <>
+        <NavbarMenu />
      <Container style={{ marginTop: '30px'}} >
     <Card style={{borderRadius:'30px 30px 30px 30px'}}>
     <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'5px 5px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white',borderRadius:'30px 30px 0px 0px'}}>Hospital Login Shrikant Again</Card.Header>

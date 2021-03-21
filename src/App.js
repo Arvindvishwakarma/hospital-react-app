@@ -1,5 +1,5 @@
 import './App.css';
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import NavbarMenu from './components/NavbarMenu';
 import Home from './pages/Home';
 import Objectives from './pages/Objectives';
@@ -8,58 +8,36 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/admin/AdminLogin';
 import HospitalLogin from './pages/hospitals/HospitalLogin';
-import HospitalRegister from './components/HospitalComponents/RequestForms';
-import UserRegister from './components/HospitalComponents/UserForm';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
+import Logout from './pages/admin/AdminLogout';
 import MapWork from './pages/mapWork';
 
-import AuthContext from './context/auth-context';
 
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 function App() {
-
-  const [stateToken, setStateToken] = useState(null);
-  const [stateAdminId, setStateAdminId] = useState(null);
-
-  function login(adminId, token, tokenExpiration) {
-    setStateAdminId(adminId);
-    setStateToken(token);
-  }
-
-  function logout(){
-    setStateAdminId(null);
-    setStateToken(null);
-  }
+  const token = localStorage.getItem('token')
 
   return (
     <div className="App">
-      <NavbarMenu />
-      <AuthContext.Provider value={{
-        adminId: stateAdminId,
-        token: stateToken,
-        login: login,
-        logout: logout
-      }}>
+      {/* <NavbarMenu AdminToken={token}/> */}
       <Switch>
         <Route path="/" exact={true}><Home /></Route>
         <Route path="/objectives"><Objectives /></Route>
         <Route path="/guide"><Guide /></Route>
         <Route path="/about"><About /></Route>
         <Route path="/contact"><Contact /></Route>
-        <Route path="/admin_login"><AdminLogin /></Route>
+        <Route path="/admin_login">{token ? <Redirect to="/admin_dashboard" /> : <AdminLogin />}</Route>
         <Route path="/hospital_login"><HospitalLogin /></Route>
-        <Route path="/hospital_register"><HospitalRegister /></Route>
         <Route path="/admin_dashboard"><AdminDashboard /></Route>
-        <Route path="/user_register"><UserRegister /></Route>
         <Route path="/hospitalDetails"><HospitalDetsils /></Route>
         <Route path="/hospitalDashboard"><HospitalDashboard /></Route>
+        <Route path="/logout"><Logout /></Route>
         <Route path="/mapWork"><MapWork /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
-       </AuthContext.Provider>
     </div>
   );
 }

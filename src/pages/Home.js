@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { Col, Container, Row, Card, Button, Form, InputGroup, validated, handleSubmit } from 'react-bootstrap';
+import NavbarMenu from '../components/NavbarMenu';
 function Home() {
 
 
@@ -18,6 +19,7 @@ function Home() {
     return (
 
         <div className="header-wraper">
+        <NavbarMenu />  
             <div className="main-info">
                 <Container>
                     <Row>
