@@ -12,7 +12,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
 import Logout from './pages/admin/AdminLogout';
-import MapWork from './pages/mapWork';
+import MapWork from './pages/map/mapWork';
 
 
 import {Route, Switch, Redirect} from 'react-router-dom';

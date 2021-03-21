@@ -1,10 +1,62 @@
-import { React, useState } from 'react';
-import { Col, Container, Row, Card, Button, Form, InputGroup, validated, handleSubmit } from 'react-bootstrap';
+import { React, useState, useEffect, useRef } from 'react';
+import { Col, Container, Row, Card, Button, Form } from 'react-bootstrap';
 import NavbarMenu from '../components/NavbarMenu';
+import Map from './map/mapWork'
 function Home() {
 
 
     const [validated, setValidated] = useState(false);
+
+    const [UserLocation, setLocation] = useState({
+        loaded: false,
+        coordinates: { lat: "", lng: "" }
+    })
+
+
+    let fName = useRef(null)
+    let pName = useRef(null)
+    let contact = useRef(null)
+    let aadhar = useRef(null)
+
+    const [userDetails, setUserDetails] = useState({
+        fullName: "",
+        patientName: "",
+        contact: "",
+        aadhar: "",
+        status: false
+    })
+
+    const onSuccess = (Ulocation) => {
+        setLocation({
+            loaded: true,
+            coordinates: {
+                lat: Ulocation.coords.latitude,
+                lng: Ulocation.coords.longitude
+            }
+        })
+    }
+
+    const onError = error => {
+        setLocation({
+            loaded: true,
+            error
+        })
+    }
+
+    useEffect(() => {
+        if (!("geolocation" in navigator)) {
+            onError({
+                code: 0,
+                message: "Geolocation not supported"
+            })
+        }
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+    }, [])
+
+
+    console.log("UserLocation", UserLocation)
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -12,20 +64,41 @@ function Home() {
             event.preventDefault();
             event.stopPropagation();
         }
-
         setValidated(true);
-    };
+        event.preventDefault();
+        const Fname = fName.current.value
+        const Pname = pName.current.value
+        const Contact = contact.current.value
+        const Aadhar = aadhar.current.value
 
+        setUserDetails({
+            fullName: Fname,
+            patientName: Pname,
+            contact: Contact,
+            aadhar: Aadhar,
+            status: true
+        })
+        console.log(Fname, Pname, Contact, Aadhar)
+    };
+    console.log("User", userDetails)
+
+    if (userDetails.status === true) {
+        return (
+            <div className="header-wraper">
+                <Map userDetails={userDetails} UserLocation={UserLocation}/>
+            </div>
+        )
+    }
     return (
 
         <div className="header-wraper">
-        <NavbarMenu />  
+            <NavbarMenu />
             <div className="main-info">
                 <Container>
                     <Row>
                         <Col style={{ marginTop: '100px' }}>
-                            <Card style={{borderRadius:'30px'}}>
-                            <Card.Header style={{textAlign:'center',fontWeight:'700',borderRadius:'30px 30px 0 0px',fontSize:'1.6rem', backgroundColor:'#2980b9',color:'white'}}>Book Your Bed</Card.Header>
+                            <Card style={{ borderRadius: '30px' }}>
+                                <Card.Header style={{ textAlign: 'center', fontWeight: '700', borderRadius: '30px 30px 0 0px', fontSize: '1.6rem', backgroundColor: '#2980b9', color: 'white' }}>Book Your Bed</Card.Header>
                                 <Card.Body>
                                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                         <Form.Row>
@@ -36,6 +109,7 @@ function Home() {
                                                     type="text"
                                                     placeholder="Enter Full Name"
                                                     //defaultValue="Mark"
+                                                    ref={fName}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide name.
@@ -48,7 +122,7 @@ function Home() {
                                                     required
                                                     type="text"
                                                     placeholder="Enter Patient Name"
-                                                    
+                                                    ref={pName}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide patient name.
@@ -65,6 +139,7 @@ function Home() {
                                                     required
                                                     type="text"
                                                     placeholder="Enter Contact No"
+                                                    ref={contact}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide correct contact number.
@@ -77,7 +152,7 @@ function Home() {
                                                     required
                                                     type="text"
                                                     placeholder="Enter Aadhar No"
-                                                    
+                                                    ref={aadhar}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide correct aadhar number.
@@ -85,27 +160,10 @@ function Home() {
                                                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                             </Form.Group>
                                         </Form.Row>
-
-                                        <Form.Row>
-                                            <Form.Group as={Col} md="12" controlId="validationCustom05">
-                                                <Form.Label>Current Location</Form.Label>
-                                                <Form.Control
-                                                    required
-                                                    type="text"
-                                                    placeholder="Enter Your Current Location"
-                                          
-                                                />
-                                                <Form.Control.Feedback type="invalid">
-                                                    Please provide correct location.
-                                                </Form.Control.Feedback>
-                                                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Form.Row>
-
                                         <center>
-                                        <Button type="submit">Submit form</Button>
+                                            <Button type="submit">Submit form</Button>
                                         </center>
- 
+
                                     </Form>
                                 </Card.Body>
                             </Card>
