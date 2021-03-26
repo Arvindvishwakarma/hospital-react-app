@@ -99,7 +99,7 @@ function AllHospitals() {
       };
   
   
-      setInterval(function() {
+
       fetch('http://localhost:4000/graphql',{
           method: 'POST',
           body: JSON.stringify(requestBody),
@@ -121,10 +121,10 @@ function AllHospitals() {
       })
       .catch(err => {
           console.log(err);
-      })}, 1000);
+      })
   }
   
-
+console.log("stateSingle",stateSingleHospital)
 
     return (
 

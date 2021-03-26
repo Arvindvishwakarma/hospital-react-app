@@ -13,6 +13,7 @@ import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
 import Logout from './pages/admin/AdminLogout';
 import MapWork from './pages/map/mapWork';
+import HospitalRegister from './pages/hospitals/HospitalRegistrationRequest';
 
 
 import {Route, Switch, Redirect} from 'react-router-dom';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/hospitalDashboard"><HospitalDashboard /></Route>
         <Route path="/logout"><Logout /></Route>
         <Route path="/mapWork"><MapWork /></Route>
+        <Route path="/hospital_register"><HospitalRegister /></Route>
         <Route path="*"><PageNotFound /></Route>
        </Switch>
     </div>

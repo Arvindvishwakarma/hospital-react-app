@@ -74,19 +74,18 @@ function Beds() {
     )
 
     if (PrivateBeds !== '' && GeneralBeds !== '') {
+
       const requestBody = {
         query: `
         mutation{
-          createBeds(id:"604a52a7d8f0c46d091ba2ad",BedInput:{
+           updateBeds(hospitalId:"604a52a7d8f0c46d091ba2ad", wardName:"${WardsName}", BedInput:{
             privateBeds:${PrivateBeds}
-            generalBeds:${GeneralBeds}
+            generalBeds: ${GeneralBeds}
             wardsName:"${WardsName}"
           })
           {
-            _id
             privateBeds
             generalBeds
-            wardsName
           }
         }
         

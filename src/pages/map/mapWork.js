@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Card, Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Card, Container, Row, Col, Modal, Button, Table } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import NavbarMenu from '../../components/NavbarMenu'
 import { Marker, Popup, TileLayer, MapContainer } from "react-leaflet";
@@ -7,17 +7,24 @@ import haversine from 'haversine-distance'
 
 function MapWork(props) {
 
+  //Model open
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  //Model close
+
   const [stateHospital, setHospitals] = useState([])
   const [wardsById, setWardsById] = useState([])
-  const [tempHospitalId, setTempHospitalId] = useState('')
+  const [tempHospitalId, setTempHospitalId] = useState(null)
 
   useEffect(() => {
     fetchData()
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchWardsById()
-  },[])
+  }, [tempHospitalId])
 
   function fetchData() {
     const requestBody = {
@@ -90,7 +97,7 @@ function MapWork(props) {
   })
 
 
-  console.log("Sort Locations", sortLocation) 
+  console.log("Sort Locations", sortLocation)
 
 
   function fetchWardsById() {
@@ -98,7 +105,7 @@ function MapWork(props) {
       query: `
         query 
         {
-          getWardsById(id:"6040fbcbcae7d553dd4199fe"){
+          getWardsById(id:"${tempHospitalId}"){
             _id
             wardsName
             wardNo
@@ -134,13 +141,13 @@ function MapWork(props) {
 
 
 
-  console.log("WardsById",wardsById)
+  console.log("WardsById", wardsById)
 
-  let digits = '0123456789'; 
-  let OTP = ''; 
-  for (let i = 0; i < 6; i++ ) { 
-      OTP += digits[Math.floor(Math.random() * 10)]; 
-  } 
+  let digits = '0123456789';
+  let OTP = '';
+  for (let i = 0; i < 6; i++) {
+    OTP += digits[Math.floor(Math.random() * 10)];
+  }
 
   function bookBed(id) {
     alert('ok')
@@ -224,13 +231,20 @@ function MapWork(props) {
 
                 {
                   sortLocation.map(sort =>
-                    <Card style={{marginBottom:'10px'}}>
+                    <Card style={{ marginBottom: '10px' }}>
                       <Card.Body>
                         <Card.Title>{sort.hospitalName}</Card.Title>
                         <Card.Text><strong>Distance:</strong> {sort.distance} KM, <strong>Avilable Beds:</strong> 325</Card.Text>
-                        <Button variant="warning" size="sm" onClick={(id)=>{setTempHospitalId(sort.hospitalId)
-                                             bookBed(sort.hospitalId)
+                        <Button variant="warning" size="sm" onClick={(id) => {
+                          setTempHospitalId(sort.hospitalId)
+                          bookBed(sort.hospitalId)
                         }}>Show Details</Button>
+
+                        <Button variant="primary" size="sm" onClick={() => {
+                          setTempHospitalId(sort.hospitalId);
+                          handleShow()
+                        }}  style={{marginLeft:'10px'}}>Show Wards</Button>
+
                       </Card.Body>
                     </Card>
                   )
@@ -246,6 +260,52 @@ function MapWork(props) {
           </Col>
         </Row>
       </Container>
+
+
+
+
+      <Modal
+        show={show} onHide={handleClose}
+        dialogClassName="my-modal"
+        size='lg'
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Hospital Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <Table bordered hover>
+            <tbody>
+              <tr>
+                <th><strong>Wards Name:</strong></th>
+              </tr>
+              { wardsById == null ? null :
+                  wardsById.map(war =>
+                  <tr>
+                    <td>{war.wardsName}</td>
+                  </tr>
+                )
+                
+              }
+
+
+            </tbody>
+          </Table>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+
+
+
     </>
   )
 }

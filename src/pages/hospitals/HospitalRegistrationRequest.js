@@ -4,7 +4,6 @@ function HospitalRegistrationRequest(){
     return(
         <>
         <NavbarMenu />
-        <h1>HospitalRegistrationRequest Page</h1>
         <RequestForm />
         </>
     )
