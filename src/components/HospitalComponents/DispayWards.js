@@ -172,15 +172,14 @@ function DisplayWards() {
           `
     };
 
-
-
     fetch('http://localhost:4000/graphql', {
       method: 'POST',
       body: JSON.stringify(requestDeleteBody),
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(()=> setWardDeleted(true))
+    })
+    .then(()=> setWardDeleted(true))
   }
 
   //let ownWardName = wardOwnData.map(wardOwn => wardOwn.wardsName)

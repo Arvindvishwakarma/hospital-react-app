@@ -3,6 +3,7 @@ import HospitalDetails from './HospitalDetails'
 import DisplayWards from './DispayWards'
 import DisplayDoctors from './DisplayDoctors'
 import DisplayBeds from './DisplayBeds'
+import OtpVerify from './OtpVerify'
 
 function Sidebar() {
 
@@ -36,7 +37,7 @@ function Sidebar() {
                     <Col sm={10} style={{border:'2px solid black'}}>
                         <Tab.Content>
                             <Tab.Pane eventKey="first" >
-                                <Otp />
+                                <OtpVerify />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">
                                 <Patients />
@@ -62,11 +63,6 @@ function Sidebar() {
 }
 
 
-function Otp() {
-    return (
-        <h1>Otp</h1>
-    )
-}
 
 function Patients() {
     return (

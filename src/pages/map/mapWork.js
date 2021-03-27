@@ -14,9 +14,19 @@ function MapWork(props) {
 
   //Model close
 
+
+  
+  //Model open
+  const [showBook, setShowBook] = useState(false);
+  const handleBookClose = () => setShowBook(false);
+  const handleBookShow = () => setShowBook(true);
+
+  //Model close
+
   const [stateHospital, setHospitals] = useState([])
   const [wardsById, setWardsById] = useState([])
   const [tempHospitalId, setTempHospitalId] = useState(null)
+  const [tempOtp, setTempOtp] = useState('')
 
   useEffect(() => {
     fetchData()
@@ -143,14 +153,16 @@ function MapWork(props) {
 
   console.log("WardsById", wardsById)
 
-  let digits = '0123456789';
-  let OTP = '';
-  for (let i = 0; i < 6; i++) {
-    OTP += digits[Math.floor(Math.random() * 10)];
-  }
+
 
   function bookBed(id) {
-    alert('ok')
+
+    let digits = '0123456789';
+    let OTP = '';
+    for (let i = 0; i < 6; i++) {
+      OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    setTempOtp(OTP);
     const requestBodyBookBed = {
       query: `
         mutation 
@@ -237,8 +249,10 @@ function MapWork(props) {
                         <Card.Text><strong>Distance:</strong> {sort.distance} KM, <strong>Avilable Beds:</strong> 325</Card.Text>
                         <Button variant="warning" size="sm" onClick={(id) => {
                           setTempHospitalId(sort.hospitalId)
+                          handleBookShow()
                           bookBed(sort.hospitalId)
-                        }}>Show Details</Button>
+                          
+                        }}>Book Bed</Button>
 
                         <Button variant="primary" size="sm" onClick={() => {
                           setTempHospitalId(sort.hospitalId);
@@ -295,6 +309,29 @@ function MapWork(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showBook} onHide={handleBookClose}
+        dialogClassName="my-modal"
+        size='lg'
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Hospital Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <center>
+              <h2>Your bed is on hold for <strong>2 Hours</strong></h2>
+              <h3>Your OTP is: <strong>{tempOtp}</strong></h3>
+              <h5 style={{color:'red'}}>Valid for 2 Hours only</h5>
+        </center>
+              
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleBookClose}>
             Close
           </Button>
         </Modal.Footer>
