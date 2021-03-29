@@ -7,6 +7,19 @@ function UserForm() {
     const [wardNameSelect, setWardNameSelect] = React.useState('');
     const [BedType, setBedType] = React.useState([]);
 
+    
+    
+
+    useEffect(() => {
+        fetchWardsByHosId()
+    }, [])
+
+
+
+
+
+
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -17,13 +30,9 @@ function UserForm() {
         setValidated(true);
     };
 
-    useEffect(() => {
-        fetchWardsByHosId()
-    }, [])
 
-    useEffect(() => {
-        fetchBedType()
-    }, [])
+
+
 
 
 
@@ -70,12 +79,12 @@ function UserForm() {
 
     }
 
-    function fetchBedType() {
+    function fetchBedType(e) {
 
         const requestBedType = {
             query: `
                query {
-                getBedTypeByHosId(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${wardNameSelect}"){
+                getBedTypeByHosId(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${e}"){
                     _id
                     privateBeds
                     generalBeds
@@ -358,12 +367,18 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 as="select"
-                                                onChange={e => setWardNameSelect(e.target.value)}>
+                                                onChange={e => {
+                                                    setWardNameSelect(e.target.value)
+                                                    fetchBedType(e.target.value)
+                                                }
+                                                }>
+                                                <option>Select Any Wards</option>
                                                 {
                                                     wardByHosId === null ? null :
                                                         wardByHosId.map(ward =>
                                                             <option key={ward._id}>{ward.wardsName}</option>
                                                         )
+
                                                 }
 
 
@@ -379,9 +394,8 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 as="select">
-                                                {
-                                                    //Beds Fetch
-                                                }
+                                                <option>General Beds: {BedType.generalBeds}</option>
+                                                <option>Private Beds: {BedType.privateBeds}</option>
                                             </Form.Control>
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide Bed Type.
