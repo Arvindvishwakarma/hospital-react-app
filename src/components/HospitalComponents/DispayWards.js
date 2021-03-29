@@ -20,7 +20,7 @@ function DisplayWards() {
 
   useEffect(() => {
     fetchWardsData()
-  },[deleteWard])
+  },[])
 
   useEffect(() => {
     fetchWardsOwnData()

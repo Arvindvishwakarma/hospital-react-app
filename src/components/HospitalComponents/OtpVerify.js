@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-
+import UserForm from './UserForm';
 function OtpVerify() {
     const [otp, setOtp] = useState(new Array(6).fill(""));
+    const [otpValid, setOtpValid] = useState(false);
+    const [otpNotValid, setOtpNotValid] = useState();
 
     const handleChange = (element, index) => {
         if (isNaN(element.value)) return false;
@@ -13,11 +15,61 @@ function OtpVerify() {
             element.nextSibling.focus();
         }
     };
+    
+  function fetchOtpData() {
+    const requestOtpBody = {
+      query: `
+            query 
+            {
+                otpVerify(hospitalId:"605dc2c050bc051d64740999",otp:"${otp.join("")}"){
+                    _id
+                    UserName
+                    PatientName
+                    UserContect
+                    UserAadhar
+                    otp
+                  }
+              }
+            `
+    };
 
+
+
+    fetch('http://localhost:4000/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestOtpBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        if (!res) {
+          throw new Error('Failed');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        const fetchOtp = resData;
+        if(resData.errors){
+            setOtpNotValid('Otp is Not Valid or Expired!!!')
+        }else{
+            setOtpValid(true);
+            console.log("OTP",fetchOtp)
+        }
+
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+if(otpValid){
+    return <UserForm />
+}
     return (
         <div className="row">
         <div className="col text-center">
             <h2>Verify Patient's OTP</h2>
+            <h4 style={{color:'red'}}>{otpNotValid}</h4>
 
             {otp.map((data, index) => {
                 return (
@@ -45,7 +97,8 @@ function OtpVerify() {
                 <button
                     className="btn btn-primary"
                     onClick={e =>
-                        alert("Entered OTP is " + otp.join(""))
+                        {//alert("Entered OTP is " + otp.join(""))
+                        fetchOtpData(e)}
                     }
                 >
                     Verify OTP

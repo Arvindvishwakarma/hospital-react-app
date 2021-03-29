@@ -19,7 +19,7 @@ function DisplayWards() {
 
   useEffect(() => {
     fetchDoctorsData()
-  }, [deleteDoctor])
+  }, [])
 
   useEffect(() => {
     fetchOwnDoctorData()

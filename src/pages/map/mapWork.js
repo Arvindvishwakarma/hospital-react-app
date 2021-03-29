@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from "react";
 import { Card, Container, Row, Col, Modal, Button, Table } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
 import NavbarMenu from '../../components/NavbarMenu'
 import { Marker, Popup, TileLayer, MapContainer } from "react-leaflet";
 import haversine from 'haversine-distance'
@@ -89,9 +88,9 @@ function MapWork(props) {
       });
   }
   const location = []
-  const user = [props.UserLocation.coordinates.lng, props.UserLocation.coordinates.lat]
-
-  let test = stateHospital.map(hos =>
+  const user = [props.UserLocation.coordinates.lat, props.UserLocation.coordinates.lng]
+console.log("UserLocationProps",user)
+  stateHospital.map(hos =>
     location.push({
       hospitalId: hos._id,
       hospitalName: hos.hospitalName,
@@ -100,7 +99,7 @@ function MapWork(props) {
       distance: (haversine(user, [hos.lognitude, hos.latitude]) / 1000).toFixed(2),
     })
   )
-
+console.log("locationPush",location)
 
   const sortLocation = location.sort(function (a, b) {
     return a.distance - b.distance;

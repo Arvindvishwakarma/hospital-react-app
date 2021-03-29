@@ -16,7 +16,7 @@ function DisplayBeds() {
 
   useEffect(() => {
     fetchBedsData()
-  }, [deleteBed])
+  }, [])
 
   useEffect(() => {
     fetchOwnBedData()
