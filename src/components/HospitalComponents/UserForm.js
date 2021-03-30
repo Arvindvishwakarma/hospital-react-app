@@ -1,24 +1,122 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, Container, Row, Col, Form, Button } from 'react-bootstrap';
+import {Redirect} from "react-router-dom";
+import OtpVerify from './OtpVerify';
 
 function UserForm() {
     const [validated, setValidated] = React.useState(false);
     const [wardByHosId, setWardByHosId] = React.useState([]);
     const [wardNameSelect, setWardNameSelect] = React.useState('');
     const [BedType, setBedType] = React.useState([]);
+    const [redirect, setRedirect] = React.useState(false);
 
-    
-    
+    let fName = useRef(null)
+    let lName = useRef(null)
+    let aadharNo = useRef(null)
+    let contactNo = useRef(null)
+    let email = useRef(null)
+    let dob = useRef(null)
+    let gender = useRef(null)
+    let marital = useRef(null)
+    let disease = useRef(null)
+    let age = useRef(null)
+    let address = useRef(null)
+    let state = useRef(null)
+    let district = useRef(null)
+    let city = useRef(null)
+    let pincode = useRef(null)
+    let ward = useRef(null)
+    let bedtype = useRef(null)
+
 
     useEffect(() => {
         fetchWardsByHosId()
     }, [])
 
+    let updatedPrivate = (BedType.privateBeds)-1
+    let updatedGeneral = (BedType.generalBeds)-1
 
+    function updateBeds(e){
 
+        if(e === "General Beds")
+        {
+            const requestUpdateGeneralBedBody = {
+                query: `
+                mutation {
+                    updateBedsByWardName(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${ward.current.value}",BedInput:{
+                          privateBeds:${BedType.privateBeds}
+                          generalBeds:${updatedGeneral}
+                          wardsName:"${ward.current.value}"
+                        })
+                          {
+                            _id
+                            privateBeds
+                            generalBeds
+                            wardsName
+                          }
+                }
+                `
+            };
+    
+    
+    
+            fetch('http://localhost:4000/graphql',{
+                method: 'POST',
+                body: JSON.stringify(requestUpdateGeneralBedBody),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            }) 
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('Failed');
+                }
+                //alert(" General Bed Successfully!!!");
+                
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+        else{
+            const requestUpdatePrivateBedBody = {
+                query: `
+                mutation {
+                    updateBedsByWardName(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${ward.current.value}",BedInput:{
+                          privateBeds:${updatedPrivate}
+                          generalBeds:${BedType.generalBeds}
+                          wardsName:"${ward.current.value}"
+                        })
+                          {
+                            _id
+                            privateBeds
+                            generalBeds
+                            wardsName
+                          }
+                }
+                `
+            };
 
-
-
+            fetch('http://localhost:4000/graphql',{
+                method: 'POST',
+                body: JSON.stringify(requestUpdatePrivateBedBody),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            }) 
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('Failed');
+                }
+                //alert(" Private Bed Successfully!!!");
+                
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
+       
+    }
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -28,11 +126,114 @@ function UserForm() {
         }
 
         setValidated(true);
+        event.preventDefault();
+        const FName = fName.current.value;
+        const LName = lName.current.value;
+        const AadharNo = aadharNo.current.value;
+        const ContactNo = contactNo.current.value;
+        const Email = email.current.value;
+        const Dob = dob.current.value;
+        const Gender = gender.current.value;
+        const Marital = marital.current.value;
+        const Disease = disease.current.value;
+        const Age = age.current.value;
+        const Address = address.current.value;
+        const State = state.current.value;
+        const District = district.current.value;
+        const City = city.current.value;
+        const Pincode = pincode.current.value;
+        const Ward = ward.current.value;
+        const Bedtype = bedtype.current.value;
+
+        console.log(
+            FName, 
+            LName ,
+            AadharNo ,
+            ContactNo,
+            Email ,
+            Dob ,
+            Gender,
+            Marital,
+            Disease, 
+            Age ,
+            Address ,
+            State,
+            District ,
+            City ,
+            Pincode,
+            Ward,
+            Bedtype
+        )
+
+        const requestUpdateBody = {
+            query: `
+            mutation {
+                createPatientAdmit(id:"6040fbcbcae7d553dd4199fe",input:{
+                    fname:"${FName}"
+                    lname:"${LName}"
+                    aadharNo:"${AadharNo}"
+                    contactNo:"${ContactNo}"
+                    email:"${Email}"
+                    dob:"${Dob}"
+                    gender:"${Gender}"
+                    marital:"${Marital}"
+                    disease:"${Disease}"
+                    age:${Age}
+                    address:"${Address}"
+                    state:"${State}"
+                    district:"${District}"
+                    city:"${City}"
+                    pincode:"${Pincode}"
+                    ward:"${Ward}"
+                    bedtype:"${Bedtype}"
+                  })
+                  {
+                    _id
+                    fname
+                    lname
+                    aadharNo
+                    contactNo
+                    email
+                    dob
+                    gender
+                    marital
+                    disease
+                    age
+                    address
+                    state
+                    district
+                    city
+                    pincode
+                    ward
+                    bedtype
+                  }
+            }
+            `
+        };
+
+
+
+        fetch('http://localhost:4000/graphql',{
+            method: 'POST',
+            body: JSON.stringify(requestUpdateBody),
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        }) 
+        .then(res => {
+            if (res.status !== 200 && res.status !== 201) {
+                throw new Error('Failed');
+            }
+            alert("Patient Admit Successfully!!!");
+            setRedirect(true);
+            
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+
     };
-
-
-
-
 
 
 
@@ -126,6 +327,11 @@ function UserForm() {
     console.log("WardsByHosId", wardByHosId)
     console.log("WardName", wardNameSelect)
     console.log("BedType", BedType)
+
+    if(redirect)
+    {
+        return <OtpVerify />
+    }
     return (
         <>
             <Container style={{ marginTop: '30px' }} >
@@ -144,6 +350,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Patient First Name"
+                                                ref={fName}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide Patient First name.
@@ -156,6 +363,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Patient Last name"
+                                                ref={lName}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -172,6 +380,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Aadhar Number "
+                                                ref={aadharNo}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide Aadhar Number.
@@ -184,6 +393,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Contact number"
+                                                ref={contactNo}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -199,6 +409,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Email Id"
+                                                ref={email}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide Email Id.
@@ -210,7 +421,7 @@ function UserForm() {
                                             <Form.Control
                                                 required
                                                 type="date"
-
+                                                ref={dob}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -226,8 +437,9 @@ function UserForm() {
                                             <Form.Control
                                                 required
                                                 type="text"
-
-                                                as="select">
+                                                as="select"
+                                                ref={gender}
+                                                >
                                                 <option>Select Gender</option>
 
                                                 <option>Male</option>
@@ -244,8 +456,9 @@ function UserForm() {
                                             <Form.Control
                                                 required
                                                 type="text"
-
-                                                as="select">
+                                                as="select"
+                                                ref={marital}
+                                                >
                                                 <option>Select Marital Status</option>
 
                                                 <option>Married</option>
@@ -263,10 +476,10 @@ function UserForm() {
                                         <Form.Group as={Col} md="6" controlId="validationCustom10">
                                             <Form.Label>Patient Disease</Form.Label>
                                             <Form.Control
-
                                                 required
                                                 type="text"
-                                                placeholder="Enter Patient Disease "
+                                                placeholder="Enter Patient Disease"
+                                                ref={disease}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -280,14 +493,13 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Patient Age"
+                                                ref={age}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please Enter Patient Age.
                                                 </Form.Control.Feedback>
                                             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                         </Form.Group>
-
-
                                     </Form.Row>
 
                                     <Form.Row>
@@ -298,6 +510,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Patient Permanent Address:"
+                                                ref={address}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -313,6 +526,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter State"
+                                                ref={state}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please enter Correct State.
@@ -325,6 +539,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter District"
+                                                ref={district}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -340,6 +555,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter City"
+                                                ref={city}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please enter Correct City.
@@ -352,6 +568,7 @@ function UserForm() {
                                                 required
                                                 type="text"
                                                 placeholder="Enter Pincode"
+                                                ref={pincode}
 
                                             />
                                             <Form.Control.Feedback type="invalid">
@@ -371,7 +588,9 @@ function UserForm() {
                                                     setWardNameSelect(e.target.value)
                                                     fetchBedType(e.target.value)
                                                 }
-                                                }>
+                                                }
+                                                ref={ward}
+                                                >
                                                 <option>Select Any Wards</option>
                                                 {
                                                     wardByHosId === null ? null :
@@ -393,9 +612,11 @@ function UserForm() {
                                             <Form.Control
                                                 required
                                                 type="text"
-                                                as="select">
-                                                <option>General Beds: {BedType.generalBeds}</option>
-                                                <option>Private Beds: {BedType.privateBeds}</option>
+                                                as="select"
+                                                ref={bedtype}
+                                                >
+                                                <option>General Beds</option>
+                                                <option>Private Beds</option>
                                             </Form.Control>
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide Bed Type.
@@ -405,7 +626,7 @@ function UserForm() {
 
                                     </Form.Row>
                                     <center>
-                                        <Button type="submit">Submit form</Button>
+                                        <Button type="submit" onClick={()=> updateBeds(bedtype.current.value)}>Submit form</Button>
                                     </center>
 
                                 </Form>

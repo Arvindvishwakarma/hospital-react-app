@@ -4,7 +4,7 @@ import DisplayWards from './DispayWards'
 import DisplayDoctors from './DisplayDoctors'
 import DisplayBeds from './DisplayBeds'
 import OtpVerify from './OtpVerify'
-
+import AllAdmitPatients from './AllAdmitPatients'
 function Sidebar() {
 
     return (
@@ -40,7 +40,7 @@ function Sidebar() {
                                 <OtpVerify />
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">
-                                <Patients />
+                                <AllAdmitPatients />
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
                                 <HospitalDetails />
@@ -64,11 +64,6 @@ function Sidebar() {
 
 
 
-function Patients() {
-    return (
-        <h1>Patients</h1>
-    )
-}
 
 function Details() {
     return (
