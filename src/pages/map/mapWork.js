@@ -13,19 +13,32 @@ function MapWork(props) {
 
   //Model close
 
-
-  
   //Model open
   const [showBook, setShowBook] = useState(false);
   const handleBookClose = () => setShowBook(false);
   const handleBookShow = () => setShowBook(true);
-
   //Model close
 
+
+   //Model open
+   const [showBed, setShowBed] = useState(false);
+   const handleBedClose = () => setShowBed(false);
+   const handleBedShow = () => setShowBed(true);
+   //Model close
+
+
+
+
+   
   const [stateHospital, setHospitals] = useState([])
   const [wardsById, setWardsById] = useState([])
   const [tempHospitalId, setTempHospitalId] = useState(null)
   const [tempOtp, setTempOtp] = useState('')
+  const [bedByHosId, setBedByHosId] = useState([])
+  const [hosId, setHosId] = useState()
+  const [totalPrivateState, setTotalPrivateState] = useState('')
+  const [totalGeneralState, setTotalGeneralState] = useState('')
+  const [totalBedState, setTotalBedState] = useState('')
 
   useEffect(() => {
     fetchData()
@@ -35,12 +48,16 @@ function MapWork(props) {
     fetchWardsById()
   }, [tempHospitalId])
 
+  useEffect(() => {
+    fetchBedByHosId()
+  }, [hosId])
+
   function fetchData() {
     const requestBody = {
       query: `
         query 
         {
-            getHospital
+          getActiveHospital
             {
                 _id
                 hospitalName
@@ -80,7 +97,7 @@ function MapWork(props) {
         return res.json();
       })
       .then(resData => {
-        const fetchHospitals = resData.data.getHospital;
+        const fetchHospitals = resData.data.getActiveHospital;
         setHospitals(fetchHospitals);
       })
       .catch(err => {
@@ -89,7 +106,7 @@ function MapWork(props) {
   }
   const location = []
   const user = [props.UserLocation.coordinates.lat, props.UserLocation.coordinates.lng]
-console.log("UserLocationProps",user)
+  console.log("UserLocationProps", user)
   stateHospital.map(hos =>
     location.push({
       hospitalId: hos._id,
@@ -99,7 +116,7 @@ console.log("UserLocationProps",user)
       distance: (haversine(user, [hos.lognitude, hos.latitude]) / 1000).toFixed(2),
     })
   )
-console.log("locationPush",location)
+  console.log("locationPush", location)
 
   const sortLocation = location.sort(function (a, b) {
     return a.distance - b.distance;
@@ -196,13 +213,66 @@ console.log("locationPush",location)
 
 
 
+  function fetchBedByHosId() {
+    const requestOwnBody = {
+      query: `
+            query 
+            {
+              getBedsByHosId(hospitalId:"${hosId}"){
+                _id
+                privateBeds
+                generalBeds
+                wardsName
+              }
+            }
+            `
+    };
 
 
+    fetch('http://localhost:4000/graphql', {
+      method: 'POST',
+      body: JSON.stringify(requestOwnBody),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error('Failed');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        //console.log(resData);
+        const fetchOwnBedData = resData.data.getBedsByHosId;
+        setBedByHosId(fetchOwnBedData);
 
+        let totalPrivate = 0
+        bedByHosId.map(pri => {
+          totalPrivate = totalPrivate + pri.privateBeds
+          setTotalPrivateState(totalPrivate)
+        })
+      
+        let totalGeneral = 0
+        bedByHosId.map(gen => {
+          totalGeneral = totalGeneral + gen.generalBeds
+          setTotalGeneralState(totalGeneral)
 
+        })
+      
+        let totalHospitalBeds = totalPrivate + totalGeneral
+        setTotalBedState(totalHospitalBeds)
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
+ 
 
+ 
 
+  console.log("bedsbyhosid",bedByHosId)
   return (
     <>
       <NavbarMenu />
@@ -250,13 +320,18 @@ console.log("locationPush",location)
                           setTempHospitalId(sort.hospitalId)
                           handleBookShow()
                           bookBed(sort.hospitalId)
-                          
+
                         }}>Book Bed</Button>
 
                         <Button variant="primary" size="sm" onClick={() => {
                           setTempHospitalId(sort.hospitalId);
                           handleShow()
-                        }}  style={{marginLeft:'10px'}}>Show Wards</Button>
+                        }} style={{ marginLeft: '10px' }}>Show Wards</Button>
+
+                        <Button variant="info" size="sm" onClick={() => {
+                          setHosId(sort.hospitalId)
+                          handleBedShow()
+                        }} style={{ marginLeft: '10px' }}>Show Beds</Button>
 
                       </Card.Body>
                     </Card>
@@ -283,7 +358,7 @@ console.log("locationPush",location)
         size='lg'
       >
         <Modal.Header closeButton>
-          <Modal.Title>Hospital Details</Modal.Title>
+          <Modal.Title>Ward's Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 
@@ -292,14 +367,15 @@ console.log("locationPush",location)
               <tr>
                 <th><strong>Wards Name:</strong></th>
               </tr>
-              { wardsById == null ? null :
-                  wardsById.map(war =>
+              {wardsById == null ? null :
+                wardsById.map(war =>
                   <tr>
                     <td>{war.wardsName}</td>
                   </tr>
                 )
-                
+
               }
+          
 
 
             </tbody>
@@ -322,12 +398,12 @@ console.log("locationPush",location)
           <Modal.Title>Hospital Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <center>
-              <h2>Your bed is on hold for <strong>2 Hours</strong></h2>
-              <h3>Your OTP is: <strong>{tempOtp}</strong></h3>
-              <h5 style={{color:'red'}}>Valid for 2 Hours only</h5>
-        </center>
-              
+          <center>
+            <h2>Your bed is on hold for <strong>2 Hours</strong></h2>
+            <h3>Your OTP is: <strong>{tempOtp}</strong></h3>
+            <h5 style={{ color: 'red' }}>Valid for 2 Hours only</h5>
+          </center>
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleBookClose}>
@@ -338,6 +414,43 @@ console.log("locationPush",location)
 
 
 
+
+      <Modal
+        show={showBed} onHide={handleBedClose}
+        dialogClassName="my-modal"
+        size='lg'
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Avilable Beds</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <center>
+          <Table bordered hover>
+            <tbody>
+              {bedByHosId == null ? null :
+                bedByHosId.map(bed =>
+                  <tr>
+                    <td><strong>Ward Name:</strong> {bed.wardsName}</td>
+                    <td><strong>PrivateBed:</strong> {bed.privateBeds}</td> 
+                    <td><strong>GeneralBed:</strong> {bed.generalBeds}</td> 
+                    <td><strong>Total Beds:</strong> {bed.privateBeds + bed.generalBeds}</td> 
+                  </tr>
+                )
+              }
+              
+            
+
+            </tbody>
+          </Table>
+          </center>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleBedClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
 
 

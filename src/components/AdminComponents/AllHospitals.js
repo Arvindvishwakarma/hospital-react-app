@@ -33,14 +33,26 @@ function AllHospitals() {
             query: `
             query 
             {
-                getHospital
-                {
-                    _id
+              getActiveHospital
+              {
+                  _id
                   hospitalName
                   hospitalRegistrationNo
                   hospitalType
+                  government
+                  address
+                  state
+                  district
+                  pincode
+                  website
+                  lognitude
+                  latitude
                   ownerName
-                }
+                  ownerContactNo
+                  ownerEmail
+                  password
+                  status
+              }
               }
             `
         };
@@ -62,7 +74,7 @@ function AllHospitals() {
         })
         .then(resData => {
             //console.log(resData);
-            const fetchHospitals = resData.data.getHospital;
+            const fetchHospitals = resData.data.getActiveHospital;
             setHospitals(fetchHospitals);
             console.log(fetchHospitals)
         })
