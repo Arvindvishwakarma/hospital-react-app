@@ -3,7 +3,7 @@ import { useEffect, React, useState, useRef } from 'react';
 
 
 function DisplayWards() {
-
+  const HosTokenById = localStorage.getItem('hospitalIdByToken')
   //Model open
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -33,13 +33,13 @@ function DisplayWards() {
       query: `
             query 
             {
-                getDoctors{
-                    _id
-                    docName
-                    docReg
-                    docSp
-                    docWard
-                  }
+              getDoctorsByHosId(hospitalId:"${HosTokenById}"){
+                _id
+                docName
+                docReg
+                docSp
+                 docWard
+              }
               }
             `
     };
@@ -61,7 +61,7 @@ function DisplayWards() {
       })
       .then(resData => {
         //console.log(resData);
-        const fetchDoctors = resData.data.getDoctors;
+        const fetchDoctors = resData.data.getDoctorsByHosId;
         setDoctors(fetchDoctors);
         console.log(fetchDoctors)
       })

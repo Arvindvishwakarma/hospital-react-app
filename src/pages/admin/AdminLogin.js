@@ -6,7 +6,7 @@ import NavbarMenu from '../../components/NavbarMenu'
 function AdminLogin() {
 
     const [isLogin, setIsLogin] = useState(false);
-    
+
     console.log(isLogin)
     let adminId = useRef(null)
     let password = useRef(null)
@@ -62,6 +62,7 @@ function AdminLogin() {
             })
             .catch(err => {
                 console.log(err)
+                alert("Username or password not correct!!!")
             })
     };
 
@@ -70,7 +71,7 @@ function AdminLogin() {
     }
     return (
         <>
-                    <NavbarMenu />
+            <NavbarMenu />
             <Container style={{ marginTop: '30px' }} >
                 <Card style={{ borderRadius: '30px 30px 30px 30px' }}>
                     <Card.Header style={{ textAlign: 'center', fontWeight: '700', borderRadius: '5px 5px 0 0px', fontSize: '1.6rem', backgroundColor: '#2980b9', color: 'white', borderRadius: '30px 30px 0px 0px' }}>Admin Login </Card.Header>
@@ -106,7 +107,7 @@ function AdminLogin() {
                                     </Form.Row>
                                     <Button type="submit">Log In</Button>
                                 </Form>
-                                <center>Don't have an account? Register here</center>
+
 
                             </Col>
                         </Row>

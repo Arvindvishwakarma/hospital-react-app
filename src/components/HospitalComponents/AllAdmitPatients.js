@@ -3,6 +3,8 @@ import { Button, Table, Modal } from 'react-bootstrap';
 
 function AllAdmitPatients() {
 
+    const HosTokenById = localStorage.getItem('hospitalIdByToken')
+
     const [allAdmitPatients, setAllAdmitPatients] = useState([]);
     const [bedById, setBedById] = useState({});
     const [bedIdstate, setBedId] = useState('');
@@ -47,7 +49,7 @@ function AllAdmitPatients() {
             query: `
           query 
           {
-            getAllAdmitPatient(hospitalId:"6040fbcbcae7d553dd4199fe"){
+            getAllAdmitPatient(hospitalId:"${HosTokenById}"){
                     _id
                     hospitalId
                     bedId

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UserForm from './UserForm';
 function OtpVerify() {
+    const HosTokenById = localStorage.getItem('hospitalIdByToken')
     const [otp, setOtp] = useState(new Array(6).fill(""));
     const [otpValid, setOtpValid] = useState(false);
     const [otpNotValid, setOtpNotValid] = useState();
@@ -21,7 +22,7 @@ function OtpVerify() {
       query: `
             query 
             {
-                otpVerify(hospitalId:"605dc2c050bc051d64740999",otp:"${otp.join("")}"){
+                otpVerify(hospitalId:"${HosTokenById}",otp:"${otp.join("")}"){
                     _id
                     UserName
                     PatientName

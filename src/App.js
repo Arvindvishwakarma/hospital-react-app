@@ -12,6 +12,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import HospitalDetsils from './pages/hospitals/HospitalsDetailsPage';
 import HospitalDashboard from './pages/hospitals/HospitalDashboard';
 import Logout from './pages/admin/AdminLogout';
+import HospitalLogout from './pages/hospitals/HospitalLogout';
 import MapWork from './pages/map/mapWork';
 import HospitalRegister from './pages/hospitals/HospitalRegistrationRequest';
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/hospitalDetails"><HospitalDetsils /></Route>
         <Route path="/hospitalDashboard"><HospitalDashboard /></Route>
         <Route path="/logout"><Logout /></Route>
+        <Route path="/hospitalLogout"><HospitalLogout /></Route>
         <Route path="/mapWork"><MapWork /></Route>
         <Route path="/hospital_register"><HospitalRegister /></Route>
         <Route path="*"><PageNotFound /></Route>

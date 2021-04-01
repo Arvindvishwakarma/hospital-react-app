@@ -2,6 +2,8 @@ import React, { useEffect,useState } from 'react';
 import {Card, Container, Row , Col ,Form, Button, Table} from 'react-bootstrap';
 
 function HospitalDataShow() {
+    const HosTokenById = localStorage.getItem('hospitalIdByToken')
+    
     const [stateHospitalData, setHospitalsData] = useState([])
 
         

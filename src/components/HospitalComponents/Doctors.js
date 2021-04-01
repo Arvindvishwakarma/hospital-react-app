@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 
 
 function Doctors() {
-
+  const HosTokenById = localStorage.getItem('hospitalIdByToken')
   let docName = useRef(null)
   let docReg = useRef(null)
   let docSp = useRef(null)
@@ -29,7 +29,7 @@ function Doctors() {
       const requestBody = {
         query: `
                 mutation {
-                  createDoctors(id:"60411d16cae7d553dd4199ff",DoctorInput:{
+                  createDoctors(id:"${HosTokenById}",DoctorInput:{
                     docName:"${DocName}"
                     docReg:"${DocReg}"
                     docSp:"${DocSp}"

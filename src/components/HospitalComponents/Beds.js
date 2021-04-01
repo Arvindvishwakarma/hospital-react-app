@@ -3,7 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 
 
 function Beds() {
-
+  
+  const HosTokenById = localStorage.getItem('hospitalIdByToken')
   const [allWards, setAllWards] = useState([])
 
   useEffect(() => {
@@ -78,7 +79,7 @@ function Beds() {
       const requestBody = {
         query: `
         mutation{
-           updateBeds(hospitalId:"604a52a7d8f0c46d091ba2ad", wardName:"${WardsName}", BedInput:{
+           updateBeds(hospitalId:"${HosTokenById}", wardName:"${WardsName}", BedInput:{
             privateBeds:${PrivateBeds}
             generalBeds: ${GeneralBeds}
             wardsName:"${WardsName}"

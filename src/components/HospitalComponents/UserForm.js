@@ -4,6 +4,7 @@ import {Redirect} from "react-router-dom";
 import OtpVerify from './OtpVerify';
 
 function UserForm() {
+    const HosTokenById = localStorage.getItem('hospitalIdByToken')
     const [validated, setValidated] = React.useState(false);
     const [wardByHosId, setWardByHosId] = React.useState([]);
     const [wardNameSelect, setWardNameSelect] = React.useState('');
@@ -43,7 +44,7 @@ function UserForm() {
             const requestUpdateGeneralBedBody = {
                 query: `
                 mutation {
-                    updateBedsByWardName(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${ward.current.value}",BedInput:{
+                    updateBedsByWardName(hospitalId:"${HosTokenById}",wardName:"${ward.current.value}",BedInput:{
                           privateBeds:${BedType.privateBeds}
                           generalBeds:${updatedGeneral}
                           wardsName:"${ward.current.value}"
@@ -82,7 +83,7 @@ function UserForm() {
             const requestUpdatePrivateBedBody = {
                 query: `
                 mutation {
-                    updateBedsByWardName(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${ward.current.value}",BedInput:{
+                    updateBedsByWardName(hospitalId:"${HosTokenById}",wardName:"${ward.current.value}",BedInput:{
                           privateBeds:${updatedPrivate}
                           generalBeds:${BedType.generalBeds}
                           wardsName:"${ward.current.value}"
@@ -168,7 +169,7 @@ function UserForm() {
         const requestUpdateBody = {
             query: `
             mutation {
-                createPatientAdmit(id:"6040fbcbcae7d553dd4199fe",input:{
+                createPatientAdmit(id:"${HosTokenById}",input:{
                     fname:"${FName}"
                     lname:"${LName}"
                     aadharNo:"${AadharNo}"
@@ -243,7 +244,7 @@ function UserForm() {
         const requestWard = {
             query: `
                query {
-                    getBedsByHosId(hospitalId:"604a52a7d8f0c46d091ba2ad"){
+                    getBedsByHosId(hospitalId:"${HosTokenById}"){
                         _id
                         privateBeds
                         generalBeds
@@ -285,7 +286,7 @@ function UserForm() {
         const requestBedType = {
             query: `
                query {
-                getBedTypeByHosId(hospitalId:"604a52a7d8f0c46d091ba2ad",wardName:"${e}"){
+                getBedTypeByHosId(hospitalId:"${HosTokenById}",wardName:"${e}"){
                     _id
                     privateBeds
                     generalBeds

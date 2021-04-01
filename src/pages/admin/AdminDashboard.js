@@ -15,10 +15,11 @@ function AdminDashboard() {
 
     jwt.verify(AdminToken, 'superAdminSecretKey', function(err, decoded) {
         if (err) {
-            history.push("/logout")
-            
+            history.push("/logout")    
         }
       });
+
+      var decoded = jwt.verify(AdminToken, 'superAdminSecretKey');
         return (
             <>
             <NavbarMenu />
@@ -26,6 +27,7 @@ function AdminDashboard() {
                     <Row>
                         <Col>
                             <h1 style={{textAlign:'center',marginTop:'30px'}}>Admin Dashboard</h1>
+                            <h3 style={{textAlign:'center',marginTop:'30px'}}>Welcome <strong>{decoded.loginId}</strong></h3>
                         </Col>
                     </Row>
                 </Container>

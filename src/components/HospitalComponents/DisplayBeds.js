@@ -3,6 +3,9 @@ import { useEffect, React, useState, useRef } from 'react';
 
 
 function DisplayBeds() {
+
+  const HosTokenById = localStorage.getItem('hospitalIdByToken')
+
   //Model open
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -27,13 +30,12 @@ function DisplayBeds() {
       query: `
             query 
             {
-                getBeds{
-                    _id
-                    privateBeds
-                    generalBeds
-                    wardsName
-
-                  }
+              getBedsByHosId(hospitalId:"${HosTokenById}"){
+                _id
+                privateBeds
+                generalBeds
+                 wardsName
+              }
               }
             `
     };
@@ -55,7 +57,7 @@ function DisplayBeds() {
       })
       .then(resData => {
         //console.log(resData);
-        const fetchBeds = resData.data.getBeds;
+        const fetchBeds = resData.data.getBedsByHosId;
         setBeds(fetchBeds);
         console.log(fetchBeds)
       })
@@ -102,22 +104,6 @@ function DisplayBeds() {
         console.log(err);
       });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-import {React, useState,useEffect} from 'react';
+import {React} from 'react';
 import logo from '../logo.png';
 import { Navbar, Nav } from 'react-bootstrap';
 
@@ -30,6 +30,17 @@ function NavbarMenu() {
                                     <Nav.Link href="/logout">Logout</Nav.Link> 
                                     </>
 
+                                    : localStorage.getItem('hosToken') ?
+
+                                    <>
+                                    <Nav.Link href="/">Home</Nav.Link>
+                                    <Nav.Link href="/objectives">Objectives</Nav.Link>
+                                    <Nav.Link href="/guide">Guide</Nav.Link>
+                                    <Nav.Link href="/about">About Us</Nav.Link>
+                                    <Nav.Link href="/contact">Contact Us</Nav.Link> 
+                                    <Nav.Link href="/hospitalLogout">Logout</Nav.Link>
+                                    </>
+
                                     :
 
                                     <>
@@ -41,6 +52,7 @@ function NavbarMenu() {
                                     <Nav.Link href="/admin_login">Admin Login</Nav.Link>
                                     <Nav.Link href="/hospital_login">Hospital Login</Nav.Link>
                                     </>
+
                                 }                                                                                                                                                                                                           
                                 </Nav>
 

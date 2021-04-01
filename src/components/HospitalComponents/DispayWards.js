@@ -4,6 +4,8 @@ import { useEffect, React, useState, useRef } from 'react';
 
 function DisplayWards() {
 
+  const HosTokenById = localStorage.getItem('hospitalIdByToken')
+  
   //Model open
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -36,11 +38,12 @@ function DisplayWards() {
       query: `
             query 
             {
-                getWards{
-                    _id
-                    wardsName
-                    wardNo
-                  }
+              getWardsByHosId(hospitalId:"${HosTokenById}")
+              {
+                _id
+                wardsName
+                wardNo
+              }
               }
             `
     };
@@ -62,7 +65,7 @@ function DisplayWards() {
       })
       .then(resData => {
         //console.log(resData);
-        const fetchWards = resData.data.getWards;
+        const fetchWards = resData.data.getWardsByHosId;
         setWards(fetchWards);
         console.log(fetchWards)
       })

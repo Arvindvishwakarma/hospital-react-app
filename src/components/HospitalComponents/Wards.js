@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 
 
 function Wards() {
-
+  const HosTokenById = localStorage.getItem('hospitalIdByToken')
   let wardName = useRef(null)
   let wardNo = useRef(null)
 
@@ -24,7 +24,7 @@ function Wards() {
         query: `
                 mutation {
                   createWards(
-                    id:"6040fbcbcae7d553dd4199fe" ,
+                    id:"${HosTokenById}" ,
                       WardInput:
                       {
                         wardsName:"${WardName}"
