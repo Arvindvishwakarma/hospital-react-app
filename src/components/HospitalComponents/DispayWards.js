@@ -183,6 +183,7 @@ function DisplayWards() {
       }
     })
     .then(()=> setWardDeleted(true))
+    alert('Wards Deleted')
   }
 
   //let ownWardName = wardOwnData.map(wardOwn => wardOwn.wardsName)

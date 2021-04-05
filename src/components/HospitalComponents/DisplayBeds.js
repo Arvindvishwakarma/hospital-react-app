@@ -208,6 +208,7 @@ function DisplayBeds() {
         'Content-Type': 'application/json'
       }
     })
+    alert('Bed Deleted')
   }
 
 

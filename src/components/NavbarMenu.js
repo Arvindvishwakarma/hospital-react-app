@@ -27,6 +27,7 @@ function NavbarMenu() {
                                     <Nav.Link href="/guide">Guide</Nav.Link>
                                     <Nav.Link href="/about">About Us</Nav.Link>
                                     <Nav.Link href="/contact">Contact Us</Nav.Link> 
+                                    <Nav.Link href="/admin_dashboard">Dashboard</Nav.Link> 
                                     <Nav.Link href="/logout">Logout</Nav.Link> 
                                     </>
 
@@ -38,6 +39,7 @@ function NavbarMenu() {
                                     <Nav.Link href="/guide">Guide</Nav.Link>
                                     <Nav.Link href="/about">About Us</Nav.Link>
                                     <Nav.Link href="/contact">Contact Us</Nav.Link> 
+                                    <Nav.Link href="/hospitalDashboard">Dashboard</Nav.Link> 
                                     <Nav.Link href="/hospitalLogout">Logout</Nav.Link>
                                     </>
 

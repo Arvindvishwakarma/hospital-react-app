@@ -190,7 +190,6 @@ function PendingHospitals() {
                             </tr>
                           </thead>
                           <tbody>
-                          {pendingHospital}
                                   {
                                     
                                      stateHospital.map(hos => 

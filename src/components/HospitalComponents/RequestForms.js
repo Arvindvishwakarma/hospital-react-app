@@ -1,9 +1,12 @@
 import {React, useState, useRef} from 'react';
 import { Card, Container, Row , Col ,Form, Button} from 'react-bootstrap';
+import {Redirect} from 'react-router-dom'
 
 function RequestForms(){
 
     const [validated, setValidated] = useState(false);
+    const [redirect, setRedirect] = useState(false);
+
     let hospitalName = useRef(null)
     let ownerName = useRef(null)
     let ownerContact = useRef(null)
@@ -102,8 +105,14 @@ function RequestForms(){
                 'Content-Type' : 'application/json'
             }
         });
-
+        alert("Hospital Register Successfully.")
+        //event.target.reset();
+        setRedirect(true)
     };
+
+    if(redirect){
+        return <Redirect to="/hospital_login" />
+    }
     return(
         <>
      <Container style={{ marginTop: '30px' }} >

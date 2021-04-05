@@ -315,7 +315,7 @@ function MapWork(props) {
                     <Card style={{ marginBottom: '10px' }}>
                       <Card.Body>
                         <Card.Title>{sort.hospitalName}</Card.Title>
-                        <Card.Text><strong>Distance:</strong> {sort.distance} KM, <strong>Avilable Beds:</strong> 325</Card.Text>
+                        <Card.Text><strong>Distance:</strong> {sort.distance} KM</Card.Text>
                         <Button variant="warning" size="sm" onClick={(id) => {
                           setTempHospitalId(sort.hospitalId)
                           handleBookShow()

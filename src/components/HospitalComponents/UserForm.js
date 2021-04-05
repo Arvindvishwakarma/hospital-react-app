@@ -30,6 +30,8 @@ function UserForm() {
     let bedtype = useRef(null)
 
 
+
+
     useEffect(() => {
         fetchWardsByHosId()
     }, [])
@@ -165,11 +167,10 @@ function UserForm() {
             Ward,
             Bedtype
         )
-
         const requestUpdateBody = {
             query: `
             mutation {
-                createPatientAdmit(id:"${HosTokenById}",input:{
+                createPatientAdmit(hospitalId:"${HosTokenById}",bedId:"${BedType._id}",input:{
                     fname:"${FName}"
                     lname:"${LName}"
                     aadharNo:"${AadharNo}"
@@ -212,26 +213,29 @@ function UserForm() {
             `
         };
 
-
-
-        fetch('http://localhost:4000/graphql',{
-            method: 'POST',
-            body: JSON.stringify(requestUpdateBody),
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        }) 
-        .then(res => {
-            if (res.status !== 200 && res.status !== 201) {
-                throw new Error('Failed');
-            }
-            alert("Patient Admit Successfully!!!");
-            setRedirect(true);
-            
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        if(Ward ===  "Select Any Wards"){
+            alert("There is no ward available or Select any Ward")
+        }
+        else{
+            fetch('http://localhost:4000/graphql',{
+                method: 'POST',
+                body: JSON.stringify(requestUpdateBody),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            }) 
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('Failed');
+                }
+                alert("Patient Admit Successfully!!!");
+                setRedirect(true);
+                
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        }
 
 
     };
