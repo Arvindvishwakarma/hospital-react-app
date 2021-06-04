@@ -64,21 +64,24 @@ function Home() {
             event.preventDefault();
             event.stopPropagation();
         }
+        else{
+            event.preventDefault();
+            const Fname = fName.current.value
+            const Pname = pName.current.value
+            const Contact = contact.current.value
+            const Aadhar = aadhar.current.value
+    
+            setUserDetails({
+                fullName: Fname,
+                patientName: Pname,
+                contact: Contact,
+                aadhar: Aadhar,
+                status: true
+            })
+            console.log(Fname, Pname, Contact, Aadhar)
+        }
         setValidated(true);
-        event.preventDefault();
-        const Fname = fName.current.value
-        const Pname = pName.current.value
-        const Contact = contact.current.value
-        const Aadhar = aadhar.current.value
-
-        setUserDetails({
-            fullName: Fname,
-            patientName: Pname,
-            contact: Contact,
-            aadhar: Aadhar,
-            status: true
-        })
-        console.log(Fname, Pname, Contact, Aadhar)
+        
     };
     console.log("User", userDetails)
 
@@ -108,8 +111,8 @@ function Home() {
                                                     required
                                                     type="text"
                                                     placeholder="Enter Full Name"
-                                                    //defaultValue="Mark"
                                                     ref={fName}
+                                                    style={{borderRadius:'0px'}}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide name.
@@ -123,6 +126,7 @@ function Home() {
                                                     type="text"
                                                     placeholder="Enter Patient Name"
                                                     ref={pName}
+                                                    style={{borderRadius:'0px'}}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide patient name.
@@ -140,6 +144,7 @@ function Home() {
                                                     type="text"
                                                     placeholder="Enter Contact No"
                                                     ref={contact}
+                                                    style={{borderRadius:'0px'}}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide correct contact number.
@@ -153,6 +158,7 @@ function Home() {
                                                     type="text"
                                                     placeholder="Enter Aadhar No"
                                                     ref={aadhar}
+                                                    style={{borderRadius:'0px'}}
                                                 />
                                                 <Form.Control.Feedback type="invalid">
                                                     Please provide correct aadhar number.
@@ -161,7 +167,7 @@ function Home() {
                                             </Form.Group>
                                         </Form.Row>
                                         <center>
-                                            <Button type="submit">Submit form</Button>
+                                            <Button type="submit" style={{borderRadius:'0px'}} size="sm" variant="primary">Submit form</Button>
                                         </center>
 
                                     </Form>

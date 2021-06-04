@@ -1,6 +1,5 @@
 import './App.css';
-import {React, useState, useEffect} from 'react'
-import NavbarMenu from './components/NavbarMenu';
+import {React} from 'react'
 import Home from './pages/Home';
 import Objectives from './pages/Objectives';
 import Guide from './pages/Guide';
